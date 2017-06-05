@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Bungee');
-
 .upload {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   border-radius: 0px;
-  background-color: #17202A
+  background-color: #000
 }
 
 .upload__button {
@@ -14,7 +12,7 @@
   border-radius: 2px;
   width: 200px;
   margin: 0;
-  margin-right: 5px;
+  margin-right: 20px;
 }
 
 .upload__input {
@@ -34,7 +32,6 @@
 }
 
 .upload__percent-complete {
-  font-family: 'Bungee', cursive;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -30,6 +30,11 @@ class App extends Component {
         <div>
           <nav className="navbar navbar-light bg-faded">
             <h1 className="navbar-brand mb-0">Nimbus</h1>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link" href="#">Sign Out</a>
+              </li>
+            </ul>
           </nav>
           <Route exact path="/" component={SignUp}/>
           <Route exact path="/home" component={HomeContainer}/>
