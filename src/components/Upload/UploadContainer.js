@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Upload from './Upload';
-import { storageRef, firebaseAuth, db } from '~/config/constants';
+import { storageRef, db } from '~/config/constants';
 import { formatFileName } from '~/api';
 
 class UploadContainer extends Component {

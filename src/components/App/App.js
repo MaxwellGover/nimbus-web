@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SignUp } from '~/views/SignUp';
+import { SignIn } from '~/views/SignIn';
 import { HomeContainer } from '~/views/Home';
 import { firebaseAuth } from '~/config/constants';
 import { isAuthed, notAuthed } from '~/redux/modules/authentication';
@@ -24,6 +22,15 @@ class App extends Component {
       }
     });
   }
+  signOut = () => {
+    firebaseAuth.signOut().then(() => {
+      // Sign-out successful.
+      console.log('Logged out')
+    }).catch(function(error) {
+      // An error happened.
+      console.warn(error)
+    })
+  }
   render() {
     return (
       <Router>
@@ -31,12 +38,13 @@ class App extends Component {
           <nav className="navbar navbar-light bg-faded">
             <h1 className="navbar-brand mb-0">Nimbus</h1>
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link" href="#">Sign Out</a>
+              <li className="nav-item" onClick={this.signOut}>
+                <a className="nav-link">Sign Out</a>
               </li>
             </ul>
           </nav>
           <Route exact path="/" component={SignUp}/>
+          <Route exact path="/login" component={SignIn}/>
           <Route exact path="/home" component={HomeContainer}/>
         </div>
       </Router>

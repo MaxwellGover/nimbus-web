@@ -1,0 +1,21 @@
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border: 2px solid red;
+}
+
+.sign-in__input {
+
+}
+
+.sign-in__button {
+
+}
+
+form {
+  width: 400px;
+  border: 2px solid orange;
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Upload.css';
-import numeral from 'numeral';
 
 function Upload (props) {
   return (

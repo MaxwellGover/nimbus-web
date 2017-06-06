@@ -33,6 +33,7 @@ export function createUser (formData, push) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
+      console.warn(`${errorCode}: ${errorMessage}`);
     }).then(() => {
       const user = firebaseAuth.currentUser;
 
@@ -44,6 +45,28 @@ export function createUser (formData, push) {
       dispatch(isAuthed(user.uid));
       push('/home');
 
+    }).catch((error) => {
+      console.warn('Error in createUser callback', error)
+    });
+  }
+}
+
+export function loginUser (credentials, push) {
+  return function (dispatch, getState) {
+    dispatch(authenticating());
+    const email = credentials.email;
+    const password = credentials.password;
+
+    firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.warn(`${errorCode}: ${errorMessage}`);
+      // ...
+    }).then(() => {
+      const user = firebaseAuth.currentUser;
+      dispatch(isAuthed(user.uid));
+      push('/home');
     }).catch((error) => {
       console.warn('Error in createUser callback', error)
     });

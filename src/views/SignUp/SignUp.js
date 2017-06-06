@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { createUser } from '~/redux/modules/authentication';
 import './SignUp.css';
@@ -99,6 +100,9 @@ class SignUp extends Component {
           </div>
           <button type="submit" className="sign-up__button btn btn-primary btn-lg">Sign Up</button>
         </form>
+        <div>
+          <p>Already have an account? <Link to="/login">Sign In</Link></p>
+        </div>
       </div>
     );
   }

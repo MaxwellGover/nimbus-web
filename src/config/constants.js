@@ -13,6 +13,5 @@ firebase.initializeApp({
  const firebaseAuth = firebase.auth();
  const storage = firebase.storage();
  const storageRef = storage.ref();
- const audioRef = storageRef.child('audio');
 
  export { db, firebaseAuth, storageRef }
