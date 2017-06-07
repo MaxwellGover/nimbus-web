@@ -35,14 +35,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <nav className="navbar navbar-light bg-faded">
-            <h1 className="navbar-brand mb-0">Nimbus</h1>
-            <ul className="navbar-nav">
-              <li className="nav-item" onClick={this.signOut}>
-                <a className="nav-link">Sign Out</a>
-              </li>
-            </ul>
-          </nav>
           <Route exact path="/" component={SignUp}/>
           <Route exact path="/login" component={SignIn}/>
           <Route exact path="/home" component={HomeContainer}/>

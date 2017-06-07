@@ -1,21 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
 .sign-in {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  border: 2px solid red;
+  background: url(../../images/bg.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.sign-in__logo-wrapper {
+  margin-bottom: 20px;
+}
+
+.sign-in__logo {
+  width: 500px
 }
 
 .sign-in__input {
-
+  padding: 15px;
 }
 
 .sign-in__button {
+  width: 100%;
+  margin-top: 5px;
+  background-color: #141414;
+  border-color: #141414;
+  font-family: 'Nunito', sans-serif;
+}
 
+.sign-in__go-back {
+  margin-top: 10px;
+  font-family: 'Nunito', sans-serif;
 }
 
 form {
   width: 400px;
-  border: 2px solid orange;
 }

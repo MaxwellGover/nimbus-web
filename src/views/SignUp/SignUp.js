@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { createUser } from '~/redux/modules/authentication';
+// import logo from '~/images/logo.png';
 import './SignUp.css';
 
 class SignUp extends Component {
@@ -44,42 +45,41 @@ class SignUp extends Component {
     const push = this.props.history.push;
     return (
       <div className="sign-up">
-        <div>
-          <h1>Nimbus</h1>
+        <div className="sign-up__logo-wrapper">
+          <img className="sign-up__logo" src="http://i.imgur.com/OHRPgRy.png" alt="nimbus"/>
         </div>
-        <form onSubmit={(e) => this.handleSubmit(this.state, push, e)}>
+        <div className="sign-up__text-wrapper">
+          <h5>Create a free Nimbus account.</h5>
+        </div>
+        <form className="sign-up__form" onSubmit={(e) => this.handleSubmit(this.state, push, e)}>
           <div className="form-group">
-            <label>Username</label>
             <input
               type="text"
               className="sign-up__input form-control"
               id="formGroupExampleInput"
-              placeholder="Choose a username"
+              placeholder="Username"
               onChange={this.handleUsernameChange}
             />
           </div>
           <div className="form-group">
-            <label>Display Name</label>
             <input
               type="text"
               className="sign-up__input form-control"
               id="formGroupExampleInput2"
-              placeholder="Choose a display name"
+              placeholder="Display Name"
               onChange={this.handleDisplayNameChange}
             />
           </div>
           <div className="form-group">
-            <label>Email</label>
             <input
               type="email"
               className="sign-up__input form-control"
               id="formGroupExampleInput3"
-              placeholder="Enter your email address"
+              placeholder="Email"
               onChange={this.handleEmailChange}
             />
           </div>
           <div className="form-group">
-            <label>Password</label>
             <input
               type="password"
               className="sign-up__input form-control"
@@ -89,19 +89,18 @@ class SignUp extends Component {
             />
           </div>
           <div className="form-group">
-            <label>Confirm password</label>
             <input
               type="password"
               className="sign-up__input form-control"
               id="formGroupExampleInput4"
-              placeholder="Password"
+              placeholder="Confirm Password"
               onChange={this.handleConfirmPasswordChange}
             />
           </div>
           <button type="submit" className="sign-up__button btn btn-primary btn-lg">Sign Up</button>
         </form>
-        <div>
-          <p>Already have an account? <Link to="/login">Sign In</Link></p>
+        <div className="sign-up__login-text-wrapper">
+          <p>Already have an account? <Link to="/login" style={{color: '#fff'}}>Sign In</Link></p>
         </div>
       </div>
     );
