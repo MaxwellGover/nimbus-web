@@ -1,34 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
 .upload {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  border-radius: 0px;
-  background-color: #141414
+  font-family: 'Nunito', sans-serif;
+}
+
+.upload__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  margin-top: 20px
 }
 
 .upload__button {
   cursor: pointer;
-  border-radius: 2px;
   width: 200px;
   margin: 0;
   margin-right: 20px;
+  background-color: #141414;
+  border: #141414;
 }
 
 .upload__input {
   display: none;
-}
-
-.upload__progress-wrapper {
-  border-radius: 0px;
-  background: #17202A;
-  width: 1200px;
-  margin-right: 20px;
-}
-
-.upload__progress-bar {
-  border-radius: 0px;
-  background: #00FFFF
 }
 
 .upload__percent-complete {

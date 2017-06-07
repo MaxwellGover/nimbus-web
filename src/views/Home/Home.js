@@ -13,16 +13,19 @@ function Home (props) {
         </a>
         <div className="home__nav-links collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#" style={{color: '#fff'}}>Display Name<span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item" onClick={props.signOut}>
-              <a className="nav-link" href="#" style={{color: '#fff'}}>Sign Out</a>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" style={{color: '#fff'}} href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Display Name
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a className="dropdown-item" href="#">Profile</a>
+                <a className="dropdown-item" href="#" onClick={props.signOut}>Sign Out</a>
+              </div>
             </li>
           </ul>
         </div>
+        <UploadContainer />
       </nav>
-      <UploadContainer />
       <LibraryContainer />
     </div>
   );
