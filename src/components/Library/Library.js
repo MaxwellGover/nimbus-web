@@ -5,13 +5,11 @@ import './Library.css';
 function Library (props) {
   return (
     <div className="library container">
-      <ul className="list-group">
+      <h4 className="library__header">Available Tracks</h4>
+      <ul className="library__list-group list-group">
         {props.songList.map((song, index) => {
           return <li className="list-group-item" key={index}>
           {song.songName}
-          <audio autoPlay="autoplay" preload="preload" controls="controls">
-            <source src={song.downloadURL} />
-          </audio>
           </li>
         })}
       </ul>

@@ -24,7 +24,7 @@
 }
 
 .sign-up__logo {
-  width: 500px
+  width: 200px
 }
 
 .sign-up__input {
@@ -37,6 +37,16 @@
   background-color: #141414;
   border-color: #141414;
   font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+}
+
+.sign-up__button:hover {
+  width: 100%;
+  margin-top: 30px;
+  background-color: #141414;
+  border-color: #141414;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
 }
 
 .sign-up__form {

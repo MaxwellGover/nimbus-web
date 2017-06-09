@@ -5,6 +5,12 @@
   min-height: 100vh;
 }
 
+.home__navbar-right {
+  display: flex;
+  align-items: center;
+  margin-right: 20px
+}
+
 .home__nav-links {
   display: flex;
   align-items: center;
@@ -14,5 +20,5 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  background: url(../../images/bg.png) no-repeat center center fixed;
+  background: #141414;
 }

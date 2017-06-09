@@ -18,7 +18,7 @@
 }
 
 .sign-in__logo {
-  width: 500px
+  width: 200px
 }
 
 .sign-in__input {
@@ -31,6 +31,16 @@
   background-color: #141414;
   border-color: #141414;
   font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+}
+
+.sign-in__button:hover {
+  width: 100%;
+  margin-top: 5px;
+  background-color: #141414;
+  border-color: #141414;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
 }
 
 .sign-in__go-back {

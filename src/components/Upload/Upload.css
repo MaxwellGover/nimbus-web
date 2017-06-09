@@ -19,7 +19,7 @@
   width: 200px;
   margin: 0;
   margin-right: 20px;
-  background-color: #141414;
+  background: url(../../images/bg.png) no-repeat center center fixed;
   border: #141414;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .upload__percent-complete {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-right: 10px;
+  padding-top: 10px;
+  color: #62ff94
 }

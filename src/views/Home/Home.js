@@ -11,20 +11,22 @@ function Home (props) {
         <a className="navbar-brand" href="#">
           <img src="http://i.imgur.com/OHRPgRy.png" width="160px" alt="logo" />
         </a>
-        <div className="home__nav-links collapse navbar-collapse" id="navbarText">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" style={{color: '#fff'}} href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Display Name
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a className="dropdown-item" href="#">Profile</a>
-                <a className="dropdown-item" href="#" onClick={props.signOut}>Sign Out</a>
-              </div>
-            </li>
-          </ul>
+        <div className="home__navbar-right">
+          <UploadContainer />
+          <div className="home__nav-links collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" style={{color: '#fff'}} href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Display Name
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a className="dropdown-item" href="#">Profile</a>
+                  <a className="dropdown-item" href="#" onClick={props.signOut}>Sign Out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-        <UploadContainer />
       </nav>
       <LibraryContainer />
     </div>

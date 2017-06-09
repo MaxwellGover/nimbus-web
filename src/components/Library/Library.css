@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
 .library {
-  margin-top: 60px
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 80px;
+  width: 600px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.library__header {
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.list-group-item {
+  background-color: #000;
+  color: #fff
+}
+
+.list-group-item:hover {
+  background: url(../../images/bg.png) no-repeat center center fixed;
+  cursor: pointer;
 }
