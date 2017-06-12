@@ -7,6 +7,7 @@ import { SignIn } from '~/views/SignIn';
 import { HomeContainer } from '~/views/Home';
 import { firebaseAuth, db } from '~/config/constants';
 import { isAuthed, notAuthed } from '~/redux/modules/authentication';
+import { storeSongs } from '~/redux/modules/library';
 import './App.css';
 
 class App extends Component {
@@ -19,12 +20,26 @@ class App extends Component {
     firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         const displayNameRef = db.ref(`users/${user.uid}/displayName`);
+        const songsRef = db.ref(`users/${user.uid}/availableTracks/`);
+        const songList = [];
 
         displayNameRef.once('value').then(snapshot => {
           this.props.dispatch(isAuthed({
             uid: user.uid,
             name: snapshot.val()
           }))
+        })
+
+        // Query song list from Firebase on reload.
+        songsRef.once('value', snapshot => {
+          snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+            const song = childSnapshot.val();
+
+            songList.push(song);
+          });
+        }).then(() => {
+          this.props.dispatch(storeSongs(songList))
         })
       } else {
         this.props.dispatch(notAuthed())

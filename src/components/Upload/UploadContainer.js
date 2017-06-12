@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import Upload from './Upload';
 import { storageRef, db } from '~/config/constants';
 import { formatFileName } from '~/api';
+import { storeSongs } from '~/redux/modules/library';
 
 class UploadContainer extends Component {
   static propTypes = {
-    uid: PropTypes.string.isRequired
+    uid: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired
   }
   constructor(props) {
     super(props);
@@ -36,7 +38,23 @@ class UploadContainer extends Component {
       db.ref(`users/${this.props.uid}/availableTracks/`).push({
         songName,
         downloadURL
-      });
+      }).then(() => {
+        const songsRef = db.ref(`users/${this.props.uid}/availableTracks/`);
+        const songList = [];
+
+        // Update song list after upload.
+        songsRef.once('value', snapshot => {
+          snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+            const song = childSnapshot.val();
+
+            songList.push(song);
+          });
+        }).then(() => {
+          this.props.dispatch(storeSongs(songList))
+        })
+      })
+
       this.setState({
         percentage: 0
       })
