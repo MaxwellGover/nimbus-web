@@ -2,25 +2,55 @@
 
 .library {
   display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  background-color: #000;
+}
+
+.library__library-left {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 80px;
-  width: 600px;
-  font-family: 'Nunito', sans-serif;
+  width: 100%
 }
 
 .library__header {
   color: #fff;
-  margin-bottom: 20px;
-  text-align: center;
+  margin-left: 20px
+}
+
+.library__header-banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0px;
+  background: url(../../images/bg.png) no-repeat center center fixed;
+  height: 80px;
+}
+
+.library__song-list {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
 }
 
 .list-group-item {
   background-color: #000;
-  color: #fff
+  color: #fff;
+  border-radius: 0px;
 }
 
 .list-group-item:hover {
   background: url(../../images/bg.png) no-repeat center center fixed;
   cursor: pointer;
+}
+
+.library__side-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  background-color: #141414
 }

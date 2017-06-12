@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "buzz": "^1.2.0",
     "firebase": "^4.1.1",
     "numeral": "^2.0.6",
     "prop-types": "^15.5.10",

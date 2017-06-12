@@ -37,6 +37,9 @@ class UploadContainer extends Component {
         songName,
         downloadURL
       });
+      this.setState({
+        percentage: 0
+      })
     }.bind(this));
   }
   render () {

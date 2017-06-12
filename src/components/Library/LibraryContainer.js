@@ -2,45 +2,69 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Library from './Library';
-import { db } from '~/config/constants';
+import { firebaseAuth, db } from '~/config/constants';
+import { storeSongs } from '~/redux/modules/library';
+import { getSongPath, isPlaying } from '~/redux/modules/audio';
+import buzz from 'buzz';
 
 class LibraryContainer extends Component {
   static propTypes = {
-    uid: PropTypes.string.isRequired
+    uid: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired
   }
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
-      songList: []
+      songList: [],
+      mouseInside: false
     }
   }
   componentDidMount () {
+    console.log('user id', this.props.uid)
     const ref = db.ref(`users/${this.props.uid}/availableTracks/`);
-    // Get users songs
     ref.once('value', (snapshot) => {
-      console.log(snapshot);
-      console.log(this.props.uid)
       snapshot.forEach((childSnapshot) => {
-        var childKey = childSnapshot.key;
-        var songs = childSnapshot.val();
-        console.log(songs);
-        this.setState(() => {
-          songList: this.state.songList.push(songs);
+        const childKey = childSnapshot.key;
+        const song = childSnapshot.val();
+        console.log(song);
+        this.setState({
+          songList: this.state.songList.concat([song])
         })
       });
     });
+    console.log(this.state.songList)
+  }
+  handleSongClick = (song) => {
+    const currentSong = new buzz.sound(song);
+    this.props.dispatch(getSongPath(song))
+    currentSong.play();
+    this.props.dispatch(isPlaying)
+  }
+  mouseEnter = () => {
+    this.setState({ mouseInside: true });
+  }
+  mouseExit = () => {
+    this.setState({ mouseInside: false });
   }
   render () {
     return (
-      <Library songList={this.state.songList}/>
+      <Library
+        handleSongClick={this.handleSongClick}
+        songList={this.props.songList}
+        mouseInside={this.state.mouseInside}
+        mouseEnter={this.mouseEnter}
+        mouseExit={this.mouseExit}
+      />
     );
   }
 }
 
-function mapStateToProps ({ authentication }) {
+function mapStateToProps ({authentication, library}) {
+  console.log(authentication)
   return {
-    uid: authentication.uid
+    uid: authentication.uid,
+    songList: library.songList
   }
 }
 

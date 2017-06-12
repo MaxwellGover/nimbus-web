@@ -7,7 +7,8 @@ import Home from './Home';
 class HomeContainer extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
-    uid: PropTypes.string.isRequired
+    uid: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired
   }
   signOut = () => {
     firebaseAuth.signOut().then(() => {
@@ -19,16 +20,17 @@ class HomeContainer extends Component {
     });
   }
   render () {
-    console.log(this.props.uid)
     return (
-      <Home signOut={this.signOut}/>
+      <Home songList={this.props.songList} signOut={this.signOut} displayName={this.props.displayName}/>
     );
   }
 }
 
-function mapStateToProps ({authentication}) {
+function mapStateToProps ({authentication, library}) {
   return {
-    uid: authentication.uid
+    uid: authentication.uid,
+    displayName: authentication.displayName,
+    songList: library.songList
   }
 }
 

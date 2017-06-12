@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { UploadContainer } from '~/components/Upload';
 import { LibraryContainer } from '~/components/Library';
+import { SoundBarContainer } from '~/components/SoundBar';
 import './Home.css';
 
 function Home (props) {
@@ -17,7 +18,7 @@ function Home (props) {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" style={{color: '#fff'}} href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Display Name
+                  {props.displayName}
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <a className="dropdown-item" href="#">Profile</a>
@@ -28,13 +29,15 @@ function Home (props) {
           </div>
         </div>
       </nav>
-      <LibraryContainer />
+      <LibraryContainer songList={props.songList}/>
+      <SoundBarContainer />
     </div>
   );
 }
 
 Home.propTypes = {
-  signOut: PropTypes.func.isRequired
+  signOut: PropTypes.func.isRequired,
+  displayName: PropTypes.string.isRequired
 }
 
 export default Home;

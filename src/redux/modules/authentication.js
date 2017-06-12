@@ -1,4 +1,5 @@
 import { firebaseAuth, db } from '~/config/constants';
+import { storeSongs } from '~/redux/modules/library';
 
 const AUTHENTICATING = 'AUTHENTICATING';
 const NOT_AUTHED = 'NOT_AUTHED';
@@ -16,10 +17,10 @@ export function notAuthed () {
   }
 }
 
-export function isAuthed (uid) {
+export function isAuthed (user) {
   return {
     type: IS_AUTHED,
-    uid
+    user
   }
 }
 
@@ -28,6 +29,7 @@ export function createUser (formData, push) {
     dispatch(authenticating());
     const email = formData.email;
     const password = formData.password;
+    const displayName = formData.displayName;
 
     firebaseAuth.createUserWithEmailAndPassword(email, password).catch((error) => {
       // Handle Errors here.
@@ -35,14 +37,17 @@ export function createUser (formData, push) {
       var errorMessage = error.message;
       console.warn(`${errorCode}: ${errorMessage}`);
     }).then(() => {
-      const user = firebaseAuth.currentUser;
+      var user = firebaseAuth.currentUser;
 
       db.ref('/users/' + user.uid).set({
         username: formData.username,
         displayName: formData.displayName,
         uid: user.uid
       })
-      dispatch(isAuthed(user.uid));
+      dispatch(isAuthed({
+        uid: user.uid,
+        name: displayName
+      }));
       push('/home');
 
     }).catch((error) => {
@@ -64,9 +69,28 @@ export function loginUser (credentials, push) {
       console.warn(`${errorCode}: ${errorMessage}`);
       // ...
     }).then(() => {
-      const user = firebaseAuth.currentUser;
-      dispatch(isAuthed(user.uid));
-      push('/home');
+      var user = firebaseAuth.currentUser;
+      var songsRef = db.ref(`users/${user.uid}/availableTracks/`);
+      var songList = [];
+
+      songsRef.once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key;
+          const song = childSnapshot.val();
+          console.log(song)
+          songList.push(song);
+        });
+      }).then(() => {
+        dispatch(storeSongs(songList))
+      })
+
+      db.ref(`users/${user.uid}/displayName`).once('value').then(snapshot => {
+        dispatch(isAuthed({
+          uid: user.uid,
+          name: snapshot.val()
+        }))
+        push('/home');
+      })
     }).catch((error) => {
       console.warn('Error in createUser callback', error)
     });
@@ -76,7 +100,8 @@ export function loginUser (credentials, push) {
 const initialState = {
   isAuthed: false,
   isAuthenticating: false,
-  uid: ''
+  uid: '',
+  displayName: ''
 };
 
 export default function authentication (state = initialState, action) {
@@ -90,13 +115,15 @@ export default function authentication (state = initialState, action) {
       return {
         isAuthenticating: false,
         isAuthed: false,
-        uid: ''
+        uid: '',
+        displayName: ''
       }
       case IS_AUTHED :
         return {
           isAuthenticating: false,
           isAuthed: true,
-          uid: action.uid
+          uid: action.user.uid,
+          displayName: action.user.name
         }
     default :
       return state

@@ -5,18 +5,27 @@ import { connect } from 'react-redux';
 import { SignUp } from '~/views/SignUp';
 import { SignIn } from '~/views/SignIn';
 import { HomeContainer } from '~/views/Home';
-import { firebaseAuth } from '~/config/constants';
+import { firebaseAuth, db } from '~/config/constants';
 import { isAuthed, notAuthed } from '~/redux/modules/authentication';
 import './App.css';
 
 class App extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    uid: PropTypes.string.isRequired
   }
   componentDidMount () {
+    var songList = [];
     firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
-        this.props.dispatch(isAuthed(user.uid))
+        const displayNameRef = db.ref(`users/${user.uid}/displayName`);
+
+        displayNameRef.once('value').then(snapshot => {
+          this.props.dispatch(isAuthed({
+            uid: user.uid,
+            name: snapshot.val()
+          }))
+        })
       } else {
         this.props.dispatch(notAuthed())
       }
@@ -24,10 +33,8 @@ class App extends Component {
   }
   signOut = () => {
     firebaseAuth.signOut().then(() => {
-      // Sign-out successful.
-      console.log('Logged out')
-    }).catch(function(error) {
-      // An error happened.
+      this.props.dispatch(notAuthed())
+    }).catch((error) => {
       console.warn(error)
     })
   }
@@ -44,6 +51,10 @@ class App extends Component {
   }
 }
 
+function mapStateToProps ({ authentication }) {
+  return {
+    uid: authentication.uid
+  }
+}
 
-
-export default connect()(App);
+export default connect(mapStateToProps)(App);
