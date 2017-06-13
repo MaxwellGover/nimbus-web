@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Library from './Library';
 import { firebaseAuth, db } from '~/config/constants';
-import { storeSongs } from '~/redux/modules/library';
-import { getSongPath, isPlaying } from '~/redux/modules/audio';
+import { storeSongs, getSongPath, isPlaying } from '~/redux/modules/audio';
 
 class LibraryContainer extends Component {
   static propTypes = {
@@ -57,11 +56,11 @@ class LibraryContainer extends Component {
   }
 }
 
-function mapStateToProps ({authentication, library}) {
+function mapStateToProps ({authentication, audio}) {
   console.log(authentication)
   return {
     uid: authentication.uid,
-    songList: library.songList
+    songList: audio.songList
   }
 }
 

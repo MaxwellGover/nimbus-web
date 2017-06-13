@@ -1,11 +1,20 @@
+const STORE_SONGS = 'STORE_SONGS';
 const GET_SONG_PATH = 'GET_SONG_PATH';
 const IS_PLAYING = 'IS_PLAYING';
 
 const initialState = {
+  songList: [],
   isPlaying: false,
-  isPaused: false,
   currentTime: 0,
+  currentVolume: 30,
   currentSong: ''
+}
+
+export function storeSongs (list) {
+  return {
+    type: STORE_SONGS,
+    list
+  }
 }
 
 export function getSongPath (song) {
@@ -23,6 +32,11 @@ export function isPlaying () {
 
 export default function audio (state = initialState, action) {
   switch (action.type) {
+    case STORE_SONGS :
+      return {
+        ...state,
+        songList: action.list
+      }
     case GET_SONG_PATH:
       return {
         ...state,
@@ -31,7 +45,7 @@ export default function audio (state = initialState, action) {
     case IS_PLAYING: {
       return {
         ...state,
-        isPlaying: true
+        isPlaying: !state.isPlaying
       }
     }
     default:

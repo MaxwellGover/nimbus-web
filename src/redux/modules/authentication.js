@@ -1,5 +1,5 @@
 import { firebaseAuth, db } from '~/config/constants';
-import { storeSongs } from '~/redux/modules/library';
+import { storeSongs } from '~/redux/modules/audio';
 
 const AUTHENTICATING = 'AUTHENTICATING';
 const NOT_AUTHED = 'NOT_AUTHED';

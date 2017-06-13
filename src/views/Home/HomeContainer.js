@@ -26,11 +26,11 @@ class HomeContainer extends Component {
   }
 }
 
-function mapStateToProps ({authentication, library}) {
+function mapStateToProps ({authentication, audio}) {
   return {
     uid: authentication.uid,
     displayName: authentication.displayName,
-    songList: library.songList
+    songList: audio.songList
   }
 }
 

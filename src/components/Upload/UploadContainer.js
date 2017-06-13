@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Upload from './Upload';
 import { storageRef, db } from '~/config/constants';
 import { formatFileName } from '~/api';
-import { storeSongs } from '~/redux/modules/library';
+import { storeSongs } from '~/redux/modules/audio';
 
 class UploadContainer extends Component {
   static propTypes = {

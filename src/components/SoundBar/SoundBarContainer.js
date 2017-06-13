@@ -9,6 +9,12 @@ class SoundBarContainer extends Component {
     isPlaying: PropTypes.bool.isRequired,
     currentSong: PropTypes.string.isRequired
   }
+
+  // Debug
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
+
   render () {
     return (
       <div>

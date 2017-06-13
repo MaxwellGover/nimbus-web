@@ -7,7 +7,7 @@ import { SignIn } from '~/views/SignIn';
 import { HomeContainer } from '~/views/Home';
 import { firebaseAuth, db } from '~/config/constants';
 import { isAuthed, notAuthed } from '~/redux/modules/authentication';
-import { storeSongs } from '~/redux/modules/library';
+import { storeSongs } from '~/redux/modules/audio';
 import './App.css';
 
 class App extends Component {
