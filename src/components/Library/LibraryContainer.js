@@ -5,7 +5,6 @@ import Library from './Library';
 import { firebaseAuth, db } from '~/config/constants';
 import { storeSongs } from '~/redux/modules/library';
 import { getSongPath, isPlaying } from '~/redux/modules/audio';
-import buzz from 'buzz';
 
 class LibraryContainer extends Component {
   static propTypes = {
@@ -36,10 +35,8 @@ class LibraryContainer extends Component {
     console.log(this.state.songList)
   }
   handleSongClick = (song) => {
-    const currentSong = new buzz.sound(song);
     this.props.dispatch(getSongPath(song))
-    currentSong.play();
-    this.props.dispatch(isPlaying)
+    this.props.dispatch(isPlaying())
   }
   mouseEnter = () => {
     this.setState({ mouseInside: true });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SoundBar from './SoundBar';
-import buzz from 'buzz';
+import ReactPlayer from 'react-player';
 
 class SoundBarContainer extends Component {
   static propTypes = {
@@ -11,7 +11,10 @@ class SoundBarContainer extends Component {
   }
   render () {
     return (
-      <SoundBar isPlaying={this.props.isPlaying}/>
+      <div>
+        <ReactPlayer url={this.props.currentSong} playing={this.props.isPlaying} />
+        <SoundBar isPlaying={this.props.isPlaying}/>
+      </div>
     );
   }
 }
