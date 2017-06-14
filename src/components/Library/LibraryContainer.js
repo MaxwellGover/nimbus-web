@@ -14,24 +14,8 @@ class LibraryContainer extends Component {
     super(props);
 
     this.state = {
-      songList: [],
       mouseInside: false
     }
-  }
-  componentDidMount () {
-    console.log('user id', this.props.uid)
-    const ref = db.ref(`users/${this.props.uid}/availableTracks/`);
-    ref.once('value', (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        const childKey = childSnapshot.key;
-        const song = childSnapshot.val();
-        console.log(song);
-        this.setState({
-          songList: this.state.songList.concat([song])
-        })
-      });
-    });
-    console.log(this.state.songList)
   }
   handleSongClick = (song) => {
     this.props.dispatch(getSongPath(song))
