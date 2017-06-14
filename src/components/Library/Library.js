@@ -14,7 +14,7 @@ function Library (props) {
             return <li
               className="list-group-item"
               key={index}
-              onClick={() => props.handleSongClick(song)}
+              onClick={() => props.handleSongClick(song.downloadURL)}
               onMouseEnter={() => props.mouseEnter()}
               onMouseLeave={() => props.mouseExit()}>
             {song.songName}

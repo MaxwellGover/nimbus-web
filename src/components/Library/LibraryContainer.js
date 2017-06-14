@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Library from './Library';
 import { firebaseAuth, db } from '~/config/constants';
-import { storeSongs } from '~/redux/modules/library';
-import { getSongPath, isPlaying } from '~/redux/modules/audio';
-import buzz from 'buzz';
+import { storeSongs, isPlaying } from '~/redux/modules/audio';
 
 class LibraryContainer extends Component {
   static propTypes = {
@@ -16,30 +14,11 @@ class LibraryContainer extends Component {
     super(props);
 
     this.state = {
-      songList: [],
       mouseInside: false
     }
   }
-  componentDidMount () {
-    console.log('user id', this.props.uid)
-    const ref = db.ref(`users/${this.props.uid}/availableTracks/`);
-    ref.once('value', (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        const childKey = childSnapshot.key;
-        const song = childSnapshot.val();
-        console.log(song);
-        this.setState({
-          songList: this.state.songList.concat([song])
-        })
-      });
-    });
-    console.log(this.state.songList)
-  }
-  handleSongClick = (song) => {
-    const currentSong = new buzz.sound(song);
-    this.props.dispatch(getSongPath(song))
-    currentSong.play();
-    this.props.dispatch(isPlaying)
+  handleSongClick = (songUrl) => {
+    this.props.dispatch(isPlaying(songUrl))
   }
   mouseEnter = () => {
     this.setState({ mouseInside: true });
@@ -60,11 +39,11 @@ class LibraryContainer extends Component {
   }
 }
 
-function mapStateToProps ({authentication, library}) {
+function mapStateToProps ({authentication, audio}) {
   console.log(authentication)
   return {
     uid: authentication.uid,
-    songList: library.songList
+    songList: audio.songList
   }
 }
 

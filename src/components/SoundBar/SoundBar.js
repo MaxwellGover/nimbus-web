@@ -10,7 +10,8 @@ function SoundBar (props) {
           <a>
             <i className="soundbar__control-buttons fa fa-step-backward fa-2x" aria-hidden="true"></i>
           </a>
-          <a>
+          {/* TODO: Improve Play/Pause UI. */}
+          <a href="#" onClick={props.playSong} >
           {props.isPlaying === true
             ? <i className="soundbar__control-buttons fa fa-pause fa-2X" aria-hidden="true"></i>
             : <i className="soundbar__control-buttons fa fa-play fa-2X" aria-hidden="true"></i>}
@@ -28,7 +29,10 @@ function SoundBar (props) {
           </div>
         </div>
         <div className="soundbar__volume">
-          <i className="soundbar__volume-icon fa fa-volume-up" aria-hidden="true"></i>
+          {/* TODO: improve volume bar UI */}
+          <a href="#" onClick={() => props.setVolume(70)}>
+            <i className="soundbar__volume-icon fa fa-volume-up" aria-hidden="true"></i>
+          </a>
           <div className="soundbar__progress-volume progress">
             <div className="soundbar__progress-bar-volume progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             <div className="thumb"></div>

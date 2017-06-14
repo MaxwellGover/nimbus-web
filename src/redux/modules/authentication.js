@@ -1,5 +1,5 @@
 import { firebaseAuth, db } from '~/config/constants';
-import { storeSongs } from '~/redux/modules/library';
+import { storeSongs } from '~/redux/modules/audio';
 
 const AUTHENTICATING = 'AUTHENTICATING';
 const NOT_AUTHED = 'NOT_AUTHED';
@@ -69,16 +69,17 @@ export function loginUser (credentials, push) {
       console.warn(`${errorCode}: ${errorMessage}`);
       // ...
     }).then(() => {
-      var user = firebaseAuth.currentUser;
-      var songsRef = db.ref(`users/${user.uid}/availableTracks/`);
-      var songList = [];
+      const user = firebaseAuth.currentUser;
+      const songsRef = db.ref(`users/${user.uid}/availableTracks/`);
+      let songList;
 
-      songsRef.once('value', (snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-          const childKey = childSnapshot.key;
-          const song = childSnapshot.val();
-          console.log(song)
-          songList.push(song);
+      songsRef.once('value', snapshot => {
+        const data = snapshot.val();
+        songList = Object.keys(data).map(id => {
+          return {
+            songName: data[id].songName,
+            downloadURL: data[id].downloadURL
+          }
         });
       }).then(() => {
         dispatch(storeSongs(songList))
