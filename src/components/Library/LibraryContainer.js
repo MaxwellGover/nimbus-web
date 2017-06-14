@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Library from './Library';
 import { firebaseAuth, db } from '~/config/constants';
-import { storeSongs, getSongPath, isPlaying } from '~/redux/modules/audio';
+import { storeSongs, isPlaying } from '~/redux/modules/audio';
 
 class LibraryContainer extends Component {
   static propTypes = {
@@ -17,9 +17,8 @@ class LibraryContainer extends Component {
       mouseInside: false
     }
   }
-  handleSongClick = (song) => {
-    this.props.dispatch(getSongPath(song))
-    this.props.dispatch(isPlaying())
+  handleSongClick = (songUrl) => {
+    this.props.dispatch(isPlaying(songUrl))
   }
   mouseEnter = () => {
     this.setState({ mouseInside: true });
