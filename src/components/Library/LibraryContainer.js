@@ -17,8 +17,8 @@ class LibraryContainer extends Component {
       mouseInside: false
     }
   }
-  handleSongClick = (songUrl) => {
-    this.props.dispatch(isPlaying(songUrl))
+  handleSongClick = (song) => {
+    this.props.dispatch(isPlaying(song))
   }
   mouseEnter = () => {
     this.setState({ mouseInside: true });
@@ -40,7 +40,6 @@ class LibraryContainer extends Component {
 }
 
 function mapStateToProps ({authentication, audio}) {
-  console.log(authentication)
   return {
     uid: authentication.uid,
     songList: audio.songList

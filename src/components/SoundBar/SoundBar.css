@@ -6,7 +6,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100px;
+  height: 60px;
   background: url(../../images/bg.png) no-repeat center center fixed;
   z-index: 100;
 }
@@ -14,14 +14,24 @@
 .container {
   display: flex;
   align-items: center;
+  width: 95%
 }
 
 .soundbar__main-controls {
-  width: 25%;
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .soundbar__currently-playing {
   width: 50%;
+}
+
+.soundbar__song-name {
+  color: #fff;
+  margin-top: 3px;
+  margin: 0;
 }
 
 .soundbar__control-buttons {
@@ -29,12 +39,20 @@
   margin-right: 40px
 }
 
-.fa {
+.soundbar__current-song {
+  display: flex;
+  flex-direction: column;
+  width: 20%
+}
 
+.soundbar__currently-playing-help {
+  margin: 0;
+  color: #fff;
+  font-size: 12px
 }
 
 .soundbar__progress-bar {
-  height: 5px
+  height: 4px
 }
 
 .soundbar__volume {
@@ -45,12 +63,12 @@
 .soundbar__volume {
   display: flex;
   align-items: center;
-  width: 25%
+  width: 25%;
 }
 
 .soundbar__progress-volume {
   width: 50%;
-  height: 5px
+  height: 4px
 }
 
 .thumb {
@@ -58,7 +76,7 @@
   height: 0.5rem;
   width: 0.5rem;
   background-color: white;
-  left: 36%;
+  left: 32%;
   top: 50%;
   margin-left: -0.25rem;
   margin-top: -0.25rem;
@@ -70,5 +88,7 @@
 }
 
 .soundbar__volume-icon {
-  margin-left: 70px
+  margin-left: 70px;
+  margin-right: 10px;
+  color: #fff
 }

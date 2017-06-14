@@ -8,14 +8,19 @@ import { isPlaying, songVolume, songDuration, songProgress } from '~/redux/modul
 class SoundBarContainer extends Component {
   static propTypes = {
     isPlaying: PropTypes.bool.isRequired,
-    currentSongUrl: PropTypes.string.isRequired
+    currentSongUrl: PropTypes.string.isRequired,
+    currentSongVolume: PropTypes.number.isRequired,
+    currentSongDuration: PropTypes.number.isRequired,
+    currentSongProgress: PropTypes.number.isRequired
   }
 
   constructor() {
     super();
 
     this.state = {
-      songUrl: ''
+      songUrl: '',
+      songProgress: 0,
+      songDuration: 0
     }
 
     this.playSong = this.playSong.bind(this);
@@ -25,7 +30,10 @@ class SoundBarContainer extends Component {
   }
 
   playSong() {
-    this.props.dispatch(isPlaying(this.props.currentSongUrl));
+    this.props.dispatch(isPlaying({
+      downloadURL: this.props.currentSongUrl,
+      songName: this.props.currentSongName
+    }));
   }
 
   setVolume(value) {
@@ -38,13 +46,21 @@ class SoundBarContainer extends Component {
 
   getCurrentSongDuration(duration) {
     this.props.dispatch(songDuration(duration));
+    this.setState({
+      songDuration: duration
+    })
   }
 
   getCurrentSongProgress(progress) {
     this.props.dispatch(songProgress(progress.playedSeconds));
+    this.setState({
+      songProgress: progress
+    })
   }
 
   render () {
+    console.log(this.props.currentSongDuration);
+    console.log(this.props.currentSongProgress);
     return (
       <div>
         <ReactPlayer
@@ -56,7 +72,10 @@ class SoundBarContainer extends Component {
         <SoundBar
           isPlaying={this.props.isPlaying}
           playSong={this.playSong}
-          setVolume={this.setVolume} />
+          setVolume={this.setVolume}
+          currentSongName={this.props.currentSongName}
+          currentSongProgress={this.props.currentSongProgress}
+          currentSongDuration={this.props.currentSongDuration}/>
       </div>
     );
   }
@@ -67,6 +86,7 @@ function mapStateToProps ({audio}) {
     songList: audio.songList,
     isPlaying: audio.isPlaying,
     currentSongUrl: audio.currentSongUrl,
+    currentSongName: audio.currentSongName,
     currentSongVolume: audio.currentSongVolume,
     currentSongDuration: audio.currentSongDuration,
     currentSongProgress: audio.currentSongProgress

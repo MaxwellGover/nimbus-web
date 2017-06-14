@@ -8,6 +8,7 @@ const initialState = {
   songList: [],
   isPlaying: false,
   currentSongUrl: '',
+  currentSongName: '',
   currentSongVolume: 0.3,
   currentSongProgress: 0,
   currentSongDuration: 0,
@@ -21,14 +22,16 @@ export function storeSongs (list) {
 }
 
 // TODO: Should it be renamed to 'playSong'?.
-export function isPlaying (url) {
+export function isPlaying (song) {
+  console.log(song)
   return {
     type: PLAY_SONG,
-    url
+    song
   }
 }
 
 export function songVolume (volume) {
+  console.log('volume is', volume)
   return {
     type: SET_SONG_VOLUME,
     volume
@@ -36,6 +39,7 @@ export function songVolume (volume) {
 }
 
 export function songDuration (duration) {
+  console.log(duration);
   return {
     type: SET_SONG_DURATION,
     duration
@@ -43,6 +47,7 @@ export function songDuration (duration) {
 }
 
 export function songProgress (progress) {
+  console.log(progress);
   return {
     type: SET_SONG_PROGRESS,
     progress
@@ -62,7 +67,8 @@ export default function audio (state = initialState, action) {
       return {
         ...state,
         isPlaying: !state.isPlaying,
-        currentSongUrl: action.url ? action.url : state.songList[0].downloadURL
+        currentSongUrl: action.song.downloadURL ? action.song.downloadURL : state.songList[0].downloadURL,
+        currentSongName: action.song.songName ? action.song.songName : state.songList[0].songName
       }
     }
     case SET_SONG_VOLUME: {

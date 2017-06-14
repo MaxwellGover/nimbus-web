@@ -1,38 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 .library {
-  display: flex;
-  justify-content: space-between;
-  height: 100vh;
-  font-family: 'Nunito', sans-serif;
-  background-color: #000;
-}
-
-.library__library-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%
-}
-
-.library__header {
-  color: #fff;
-  margin-left: 20px
-}
-
-.library__header-banner {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 0px;
-  background: url(../../images/bg.png) no-repeat center center fixed;
-  height: 80px;
-}
-
-.library__song-list {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   border-radius: 0px;
+  margin-top: 130px;
+  background-color: #000;
 }
 
 .list-group-item {
@@ -42,15 +15,6 @@
 }
 
 .list-group-item:hover {
-  background: url(../../images/bg.png) no-repeat center center fixed;
+  background: #141414;
   cursor: pointer;
-}
-
-.library__side-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 30%;
-  background-color: #141414
 }

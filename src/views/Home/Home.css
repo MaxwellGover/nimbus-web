@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 .home {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  background-color: #000;
+}
+
+.home__left {
+  display: flex;
+  flex-direction: column;
   background-color: #141414;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .home__navbar-right {
@@ -20,5 +30,10 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background: #141414;
+  z-index: 20
 }
