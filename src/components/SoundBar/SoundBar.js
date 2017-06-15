@@ -4,7 +4,7 @@ import './SoundBar.css';
 
 function SoundBar (props) {
   const songProgress = (props.currentSongProgress / props.currentSongDuration) * 100;
-  console.log(songProgress)
+  console.log(Math.floor(songProgress) + '%')
   return (
     <div className="soundbar">
       <div className="container">
@@ -28,9 +28,18 @@ function SoundBar (props) {
         </div>
         <div className="soundbar__currently-playing">
           <div className="soundbar__seek-control">
-            <div className="soundbar__progress progress">
-              <div className="soundbar__progress-bar progress-bar" role="progressbar" style={{width: parseInt(songProgress) + '%'}} aria-valuenow={parseInt(songProgress)} aria-valuemin="0" aria-valuemax="100"></div>
-              <div className="thumb"></div>
+            <div className="soundbar__progress progress" onClick={(event) => console.log(event.target)}>
+              <div
+                className="soundbar__progress-bar progress-bar"
+                role="progressbar"
+                style={{width: songProgress + '%'}}
+                aria-valuenow={songProgress}
+                aria-valuemin="0"
+                aria-valuemax="1"
+              >
+              </div>
+              <div className="thumb"
+                style={{borderRadius: '50%', height: '10px', width: '10px', backgroundColor: '#fff', left: songProgress, position: 'relative', zIndex: 9000}}></div>
             </div>
           </div>
         </div>
@@ -41,7 +50,7 @@ function SoundBar (props) {
           </a>
           <div className="soundbar__progress-volume progress">
             <div className="soundbar__progress-bar-volume progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            <div className="thumb"></div>
+            <div className="soundbar_playhead-volume"></div>
           </div>
         </div>
       </div>

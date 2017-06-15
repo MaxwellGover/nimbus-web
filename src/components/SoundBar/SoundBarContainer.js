@@ -19,8 +19,9 @@ class SoundBarContainer extends Component {
 
     this.state = {
       songUrl: '',
+      volume: 0.8,
       songProgress: 0,
-      songDuration: 0
+      songDuration: 0,
     }
 
     this.playSong = this.playSong.bind(this);
@@ -57,7 +58,6 @@ class SoundBarContainer extends Component {
       songProgress: progress
     })
   }
-
   render () {
     console.log(this.props.currentSongDuration);
     console.log(this.props.currentSongProgress);
