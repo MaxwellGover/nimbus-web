@@ -16,7 +16,6 @@ class App extends Component {
     uid: PropTypes.string.isRequired
   }
   componentDidMount () {
-    var songList = [];
     firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         const displayNameRef = db.ref(`users/${user.uid}/displayName`);

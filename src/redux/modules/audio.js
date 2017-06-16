@@ -3,6 +3,7 @@ const PLAY_SONG = 'PLAY_SONG';
 const SET_SONG_VOLUME = 'SET_SONG_VOLUME';
 const SET_SONG_DURATION = 'SET_SONG_DURATION';
 const SET_SONG_PROGRESS = 'SET_SONG_PROGRESS';
+const RESET = 'RESET';
 
 const initialState = {
   songList: [],
@@ -21,11 +22,17 @@ export function storeSongs (list) {
   }
 }
 
-// TODO: Should it be renamed to 'playSong'?.
-export function isPlaying (song) {
+export function playSong (song) {
   console.log(song)
   return {
     type: PLAY_SONG,
+    song
+  }
+}
+
+export function reset (song) {
+  return {
+    type: RESET,
     song
   }
 }
@@ -39,7 +46,6 @@ export function songVolume (volume) {
 }
 
 export function songDuration (duration) {
-  console.log(duration);
   return {
     type: SET_SONG_DURATION,
     duration
@@ -47,7 +53,7 @@ export function songDuration (duration) {
 }
 
 export function songProgress (progress) {
-  console.log(progress);
+  console.log('song progess', progress);
   return {
     type: SET_SONG_PROGRESS,
     progress
@@ -71,6 +77,17 @@ export default function audio (state = initialState, action) {
         currentSongName: action.song.songName ? action.song.songName : state.songList[0].songName
       }
     }
+    case RESET: {
+      return {
+        ...state,
+        isPlaying: false,
+        currentSongUrl: '',
+        currentSongName: '',
+        currentSongVolume: 0.3,
+        currentSongProgress: 0,
+        currentSongDuration: 0,
+      }
+    }
     case SET_SONG_VOLUME: {
       return {
         ...state,
@@ -86,7 +103,7 @@ export default function audio (state = initialState, action) {
     case SET_SONG_PROGRESS: {
       return {
         ...state,
-        currentSongProgress: action.progress
+        currentSongProgress: Math.floor(action.progress)
       }
     }
     default:

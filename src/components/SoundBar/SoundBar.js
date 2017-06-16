@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import './SoundBar.css';
 
 function SoundBar (props) {
-  const songProgress = (props.currentSongProgress / props.currentSongDuration) * 100;
-  console.log(Math.floor(songProgress) + '%')
   return (
     <div className="soundbar">
       <div className="container">
         <div className="soundbar__current-song">
-          <p className="soundbar__currently-playing-help">Currently playing</p>
-          <p className="soundbar__song-name">{props.currentSongName}</p>
+          {props.currentSongName
+            ? <p className="soundbar__currently-playing-help">Currently playing</p>
+            : null
+          }
+          <p className="soundbar__song-name"><b>{props.currentSongName}</b></p>
         </div>
         <div className="soundbar__main-controls">
           <a>
@@ -27,21 +28,19 @@ function SoundBar (props) {
           </a>
         </div>
         <div className="soundbar__currently-playing">
-          <div className="soundbar__seek-control">
-            <div className="soundbar__progress progress" onClick={(event) => console.log(event.target)}>
+          <div className="soundbar__current-time">0:00</div>
+            <div className="soundbar__progress progress">
               <div
                 className="soundbar__progress-bar progress-bar"
                 role="progressbar"
-                style={{width: songProgress + '%'}}
-                aria-valuenow={songProgress}
+                style={{width: props.currentSongProgress / props.currentSongDuration * 100 + '%'}}
+                aria-valuenow="0"
                 aria-valuemin="0"
                 aria-valuemax="1"
               >
               </div>
-              <div className="thumb"
-                style={{borderRadius: '50%', height: '10px', width: '10px', backgroundColor: '#fff', left: songProgress, position: 'relative', zIndex: 9000}}></div>
             </div>
-          </div>
+          <div className="soundbar__song-duration">3:10</div>
         </div>
         <div className="soundbar__volume">
           {/* TODO: improve volume bar UI */}
@@ -50,7 +49,6 @@ function SoundBar (props) {
           </a>
           <div className="soundbar__progress-volume progress">
             <div className="soundbar__progress-bar-volume progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            <div className="soundbar_playhead-volume"></div>
           </div>
         </div>
       </div>

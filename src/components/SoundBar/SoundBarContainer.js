@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SoundBar from './SoundBar';
 import ReactPlayer from 'react-player';
-import { isPlaying, songVolume, songDuration, songProgress } from '~/redux/modules/audio';
+import { playSong, songVolume, songDuration, songProgress } from '~/redux/modules/audio';
 
 class SoundBarContainer extends Component {
   static propTypes = {
@@ -13,54 +13,46 @@ class SoundBarContainer extends Component {
     currentSongDuration: PropTypes.number.isRequired,
     currentSongProgress: PropTypes.number.isRequired
   }
-
-  constructor() {
-    super();
-
-    this.state = {
-      songUrl: '',
-      volume: 0.8,
-      songProgress: 0,
-      songDuration: 0,
-    }
+  constructor(props) {
+    super(props);
 
     this.playSong = this.playSong.bind(this);
     this.setVolume = this.setVolume.bind(this);
     this.getCurrentSongDuration = this.getCurrentSongDuration.bind(this);
     this.getCurrentSongProgress = this.getCurrentSongProgress.bind(this);
   }
-
-  playSong() {
-    this.props.dispatch(isPlaying({
+  convertTime = (timestamp) =>  {
+    let minutes = Math.floor(timestamp / 60);
+    let seconds = timestamp - (minutes * 60);
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+    timestamp = minutes + ':' + seconds;
+    return timestamp
+  }
+  playSong = () => {
+    this.props.dispatch(playSong({
       downloadURL: this.props.currentSongUrl,
       songName: this.props.currentSongName
     }));
   }
-
-  setVolume(value) {
+  setVolume = (value) => {
     if (value >= 0 && value <= 100) {
       const volume = value / 100;
 
       this.props.dispatch(songVolume(volume));
     }
   }
-
-  getCurrentSongDuration(duration) {
+  getCurrentSongDuration = (duration) => {
     this.props.dispatch(songDuration(duration));
-    this.setState({
-      songDuration: duration
-    })
   }
-
   getCurrentSongProgress(progress) {
     this.props.dispatch(songProgress(progress.playedSeconds));
-    this.setState({
-      songProgress: progress
-    })
+  }
+  updateSeekPercentage = () => {
+
   }
   render () {
-    console.log(this.props.currentSongDuration);
-    console.log(this.props.currentSongProgress);
     return (
       <div>
         <ReactPlayer
