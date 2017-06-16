@@ -3,15 +3,28 @@ import PropTypes from 'prop-types';
 import './SoundBar.css';
 
 function SoundBar (props) {
+  const songProgress = (props.currentSongProgress / props.currentSongDuration) * 100;
+  console.log(songProgress)
+
+  function getClickPosition(e) {
+      // source code from here
+      // https://stackoverflow.com/questions/3234256/find-mouse-position-relative-to-element
+    let rect = e.target.getBoundingClientRect();
+    let x = e.pageX - rect.left; //x position within the element
+    let y = e.pageY - rect.top;  //y position within the element
+    return {
+      x,
+      y
+    };
+  }
+
+
   return (
     <div className="soundbar">
       <div className="container">
         <div className="soundbar__current-song">
-          {props.currentSongName
-            ? <p className="soundbar__currently-playing-help">Currently playing</p>
-            : null
-          }
-          <p className="soundbar__song-name"><b>{props.currentSongName}</b></p>
+          <p className="soundbar__currently-playing-help">Currently playing</p>
+          <p className="soundbar__song-name">{props.currentSongName}</p>
         </div>
         <div className="soundbar__main-controls">
           <a>
@@ -28,19 +41,13 @@ function SoundBar (props) {
           </a>
         </div>
         <div className="soundbar__currently-playing">
-          <div className="soundbar__current-time">0:00</div>
+          <div className="soundbar__seek-control">
             <div className="soundbar__progress progress">
-              <div
-                className="soundbar__progress-bar progress-bar"
-                role="progressbar"
-                style={{width: props.currentSongProgress / props.currentSongDuration * 100 + '%'}}
-                aria-valuenow="0"
-                aria-valuemin="0"
-                aria-valuemax="1"
-              >
+              <div className="soundbar__progress-bar progress-bar" role="progressbar" onClick={(e) => props.setPlaybackPosition(getClickPosition(e).x)} style={{width: parseInt(songProgress) + '%'}} aria-valuenow={parseInt(songProgress)} aria-valuemin="0" aria-valuemax="100">
+                <div className="thumb"></div>
               </div>
             </div>
-          <div className="soundbar__song-duration">3:10</div>
+          </div>
         </div>
         <div className="soundbar__volume">
           {/* TODO: improve volume bar UI */}
@@ -49,6 +56,7 @@ function SoundBar (props) {
           </a>
           <div className="soundbar__progress-volume progress">
             <div className="soundbar__progress-bar-volume progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            <div className="thumb"></div>
           </div>
         </div>
       </div>

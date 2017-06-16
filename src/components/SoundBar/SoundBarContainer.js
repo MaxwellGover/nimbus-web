@@ -43,7 +43,23 @@ class SoundBarContainer extends Component {
       this.props.dispatch(songVolume(volume));
     }
   }
+<<<<<<< HEAD
   getCurrentSongDuration = (duration) => {
+=======
+
+  setPlaybackPosition(pos) {
+      console.log('setPlaybackPosition', pos);
+      if (pos >= 0 && pos <= 100) {
+          this.props.dispatch(songProgress(pos));
+
+          this.setState({
+            songProgress: pos
+          })
+      }
+  }
+
+  getCurrentSongDuration(duration) {
+>>>>>>> 70c06e6... WIP: Changed progress styling. Seeking not working yet.
     this.props.dispatch(songDuration(duration));
   }
   getCurrentSongProgress(progress) {
@@ -53,6 +69,12 @@ class SoundBarContainer extends Component {
 
   }
   render () {
+<<<<<<< HEAD
+=======
+    // console.log(this.props.currentSongDuration);
+    // console.log(this.props.currentSongProgress);
+
+>>>>>>> 70c06e6... WIP: Changed progress styling. Seeking not working yet.
     return (
       <div>
         <ReactPlayer
@@ -65,6 +87,7 @@ class SoundBarContainer extends Component {
           isPlaying={this.props.isPlaying}
           playSong={this.playSong}
           setVolume={this.setVolume}
+          setPlaybackPosition={this.setPlaybackPosition}
           currentSongName={this.props.currentSongName}
           currentSongProgress={this.props.currentSongProgress}
           currentSongDuration={this.props.currentSongDuration}/>

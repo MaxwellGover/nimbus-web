@@ -8,12 +8,30 @@ import { Side } from '~/components/Side';
 import './Home.css';
 
 function Home (props) {
+    let soundbar = null;
+    let player = null; //header + container
+    if (props.songList.length > 0) {
+        // render soundbar only if there are tracks to play
+        // todo: check if ux is OK
+        soundbar = <SoundBarContainer />
+        player = (
+            <template>
+                <Header />
+                <LibraryContainer songList={props.songList}/>
+            </template>
+        );
+    }
+    else {
+        // todo check loading flag --> avoid flicker during load!
+        player = <Header text="No tracks available yet!"/>
+    }
+
   return (
     <div className="home">
       <div className="home__left">
         <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
           <a className="navbar-brand" href="#">
-            <img src="http://i.imgur.com/OHRPgRy.png" width="160px" alt="logo" />
+            <img src={require('../../images/logo.png')} width="160px" alt="logo" />
           </a>
           <div className="home__navbar-right">
             <UploadContainer />
@@ -31,9 +49,8 @@ function Home (props) {
             </div>
           </div>
         </nav>
-        <Header />
-        <LibraryContainer songList={props.songList}/>
-        <SoundBarContainer />
+        {player}
+        {soundbar}
       </div>
       <div className="home__right">
         <Side />
