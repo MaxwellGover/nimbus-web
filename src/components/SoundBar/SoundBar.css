@@ -52,7 +52,11 @@
 }
 
 .soundbar__progress-bar {
-  height: 4px
+  height: 4px;
+}
+
+.progress {
+    overflow: visible !important;
 }
 
 .soundbar__volume {
@@ -72,19 +76,21 @@
 }
 
 .thumb {
-  position: absolute;
+  position: relative;
+  float: right;
   height: 0.5rem;
   width: 0.5rem;
-  background-color: white;
-  left: 32%;
-  top: 50%;
-  margin-left: -0.25rem;
-  margin-top: -0.25rem;
+  background-color: gray;
+  /*left: 32%;
+  top: 50%;*/
+  margin-right: -0.25rem;
+  margin-top: -0.15rem;
   border-radius: 50%;
   cursor: pointer;
   -webkit-transition: all 100ms ease-in-out;
   -moz-transition: all 100ms ease-in-out;
   transition: all 100ms ease-in-out;
+  z-index: 110;
 }
 
 .soundbar__volume-icon {

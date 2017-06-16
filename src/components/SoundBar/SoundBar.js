@@ -5,6 +5,20 @@ import './SoundBar.css';
 function SoundBar (props) {
   const songProgress = (props.currentSongProgress / props.currentSongDuration) * 100;
   console.log(songProgress)
+
+  function getClickPosition(e) {
+      // source code from here
+      // https://stackoverflow.com/questions/3234256/find-mouse-position-relative-to-element
+    let rect = e.target.getBoundingClientRect();
+    let x = e.pageX - rect.left; //x position within the element
+    let y = e.pageY - rect.top;  //y position within the element
+    return {
+      x,
+      y
+    };
+  }
+
+
   return (
     <div className="soundbar">
       <div className="container">
@@ -29,8 +43,9 @@ function SoundBar (props) {
         <div className="soundbar__currently-playing">
           <div className="soundbar__seek-control">
             <div className="soundbar__progress progress">
-              <div className="soundbar__progress-bar progress-bar" role="progressbar" style={{width: parseInt(songProgress) + '%'}} aria-valuenow={parseInt(songProgress)} aria-valuemin="0" aria-valuemax="100"></div>
-              <div className="thumb"></div>
+              <div className="soundbar__progress-bar progress-bar" role="progressbar" onClick={(e) => props.setPlaybackPosition(getClickPosition(e).x)} style={{width: parseInt(songProgress) + '%'}} aria-valuenow={parseInt(songProgress)} aria-valuemin="0" aria-valuemax="100">
+                <div className="thumb"></div>
+              </div>
             </div>
           </div>
         </div>
