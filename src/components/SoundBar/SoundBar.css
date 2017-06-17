@@ -1,3 +1,5 @@
+@import url(~react-input-range/lib/css/index.css);
+
 .soundbar {
   display: flex;
   flex-direction: column;
@@ -51,6 +53,7 @@
   font-size: 12px
 }
 
+/*
 .soundbar__progress-bar {
   height: 4px;
 }
@@ -58,11 +61,14 @@
 .progress {
     overflow: visible !important;
 }
+*/
+
 
 .soundbar__volume {
   display: flex;
   align-content: center;
 }
+
 
 .soundbar__volume {
   display: flex;
@@ -72,17 +78,18 @@
 
 .soundbar__progress-volume {
   width: 50%;
-  height: 4px
+  /*height: 4px*/
 }
 
+/*
 .thumb {
   position: relative;
   float: right;
   height: 0.5rem;
   width: 0.5rem;
   background-color: gray;
-  /*left: 32%;
-  top: 50%;*/
+  left: 32%;
+  top: 50%;
   margin-right: -0.25rem;
   margin-top: -0.15rem;
   border-radius: 50%;
@@ -92,9 +99,29 @@
   transition: all 100ms ease-in-out;
   z-index: 110;
 }
+*/
 
 .soundbar__volume-icon {
   margin-left: 70px;
   margin-right: 10px;
   color: #fff
+}
+
+.soundbar__volume-label {
+    margin-left: 1em;
+}
+
+/*
+Input range css
+*/
+.input-range__label {
+    font-family: inherit;
+}
+
+.input-range__slider {
+    background-color: white;
+}
+
+.input-range__track--active {
+    background-color: rgb(108, 201, 247);
 }
