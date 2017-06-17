@@ -1,23 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import InputRange from 'react-input-range';
 import './SoundBar.css';
 
 function SoundBar (props) {
-  const songProgress = (props.currentSongProgress / props.currentSongDuration) * 100;
-  console.log(songProgress)
+  const songProgress = props.currentSongDuration > 0 ? (props.currentSongProgress / props.currentSongDuration) * 100 : 0;
+  // console.log(props.currentSongProgress, songProgress, props.currentSongDuration)
 
-  function getClickPosition(e) {
-      // source code from here
-      // https://stackoverflow.com/questions/3234256/find-mouse-position-relative-to-element
-    let rect = e.target.getBoundingClientRect();
-    let x = e.pageX - rect.left; //x position within the element
-    let y = e.pageY - rect.top;  //y position within the element
-    return {
-      x,
-      y
-    };
+  // console.log('soundbar props', props);
+
+  function formatDuration(duration) {
+    // snippet from this SO
+    // https://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
+    return new Date(duration * 1000).toISOString().substr(14,5); //(11, 8) --> with hour
   }
 
+  let speakerSymbol = (
+      <a href="#" onClick={props.toggleMute}>
+        <i className={`soundbar__volume-icon fa ${props.isMuted ? 'fa-volume-off' : 'fa-volume-up'}`} aria-hidden="true"></i>
+      </a>
+  );
 
   return (
     <div className="soundbar">
@@ -42,22 +44,39 @@ function SoundBar (props) {
         </div>
         <div className="soundbar__currently-playing">
           <div className="soundbar__seek-control">
-            <div className="soundbar__progress progress">
-              <div className="soundbar__progress-bar progress-bar" role="progressbar" onClick={(e) => props.setPlaybackPosition(getClickPosition(e).x)} style={{width: parseInt(songProgress) + '%'}} aria-valuenow={parseInt(songProgress)} aria-valuemin="0" aria-valuemax="100">
-                <div className="thumb"></div>
+            <InputRange
+                minValue={0}
+                maxValue={100}
+                value={songProgress}
+                formatLabel={value => `${formatDuration(value/100*props.currentSongDuration)}`}
+                onChange={value => props.setPlaybackPosition(value)}
+                onChangeComplete={props.onSeekMouseUp}
+                onChangeStart={props.onSeekMouseDown}
+                />
+            {/*#5da2e9
+            <div className="soundbar__progress progress" onClick={(e) => props.setPlaybackPosition(getClickPosition(e).x)}>
+              <div className="soundbar__progress-bar progress-bar" role="progressbar" style={{width: parseInt(songProgress) + '%'}} aria-valuenow={parseInt(songProgress)} aria-valuemin="0" aria-valuemax="100">
+                <div className="thumb" onMouseDown={props.onSeekMouseDown} onSeekMouseUp={(e) => props.onSeekMouseUp(getClickPosition(e).x)}></div>
               </div>
             </div>
+            */}
           </div>
         </div>
         <div className="soundbar__volume">
           {/* TODO: improve volume bar UI */}
-          <a href="#" onClick={() => props.setVolume(70)}>
-            <i className="soundbar__volume-icon fa fa-volume-up" aria-hidden="true"></i>
-          </a>
-          <div className="soundbar__progress-volume progress">
-            <div className="soundbar__progress-bar-volume progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            <div className="thumb"></div>
+          {speakerSymbol}
+          <div className="soundbar__progress-volume">
+          <InputRange
+              minValue={0}
+              maxValue={100}
+              formatLabel={value => ''}
+              value={props.currentSongVolume * 100}
+              onChange={value => props.setVolume(value)}
+              />
           </div>
+          <span className="input-range__label soundbar__volume-label">
+            {Math.round(props.currentSongVolume * 100, 0)}
+          </span>
         </div>
       </div>
     </div>
@@ -68,6 +87,7 @@ SoundBar.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   currentSongProgress: PropTypes.number.isRequired,
   currentSongDuration: PropTypes.number.isRequired,
+  currentSongVolume: PropTypes.number.isRequired,
   playSong: PropTypes.func.isRequired
 }
 
