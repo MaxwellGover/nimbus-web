@@ -2,6 +2,7 @@ const STORE_SONGS = 'STORE_SONGS';
 const PLAY_SONG = 'PLAY_SONG';
 const PAUSE_SONG = 'PAUSE_SONG';
 const SELECT_SONG = 'SELECT_SONG';
+const SET_SONG_LOADED = 'SET_SONG_LOADED';
 const SET_SONG_VOLUME = 'SET_SONG_VOLUME';
 const SET_SONG_DURATION = 'SET_SONG_DURATION';
 const SET_SONG_PROGRESS = 'SET_SONG_PROGRESS';
@@ -10,6 +11,7 @@ const SKIP_SONG = 'SKIP_SONG';
 const initialState = {
   songList: [],
   isPlaying: false,
+  songLoaded: false, // to avoid wrong seek positin during loading
   currentSongUrl: '',
   currentSongName: '',
   currentSongVolume: 0.3,
@@ -78,6 +80,13 @@ export function songProgress (progress) {
   }
 }
 
+export function songLoaded (songLoaded) {
+    return {
+        type: SET_SONG_LOADED,
+        songLoaded
+    }
+}
+
 export default function audio (state = initialState, action) {
   switch (action.type) {
     case STORE_SONGS :
@@ -106,6 +115,7 @@ export default function audio (state = initialState, action) {
         return {
             ...state,
             isPlaying: true,
+            songLoaded: false,
             currentSongUrl: action.song.downloadURL ? action.song.downloadURL : state.songList[0].downloadURL,
             currentSongName: action.song.songName ? action.song.songName : state.songList[0].songName
         }
@@ -121,6 +131,12 @@ export default function audio (state = initialState, action) {
         ...state,
         currentSongDuration: action.duration
       }
+    }
+    case SET_SONG_LOADED: {
+        return {
+            ...state,
+            songLoaded: action.songLoaded
+        }
     }
     case SET_SONG_PROGRESS: {
       return {
@@ -144,6 +160,7 @@ export default function audio (state = initialState, action) {
         let curSong = state.currentSongUrl;
         let curPlayIndex = findIndex(curSong);
         let newSong;
+        let oldPlayIndex = curPlayIndex; // needed to check if state change req.
 
         if (curPlayIndex === undefined) {
             // no sowng active
@@ -155,22 +172,24 @@ export default function audio (state = initialState, action) {
             if (curPlayIndex < state.songList.length - 1) {
                 curPlayIndex++;
             }
-            console.log('next title', state.songList[curPlayIndex]);
+            // console.log('next title', state.songList[curPlayIndex]);
         }
         else {
             if (curPlayIndex > 0) {
                 curPlayIndex--;
             }
-            console.log('prev title', state.songList[curPlayIndex]);
+            // console.log('prev title', state.songList[curPlayIndex]);
         }
 
         newSong = state.songList[curPlayIndex];
 
-        return {
+        return curPlayIndex !== oldPlayIndex ? {
             ...state,
+            currentSongProgress: 0,
+            songLoaded: false,
             currentSongUrl: newSong.downloadURL,
             currentSongName: newSong.songName
-        }
+        }: state;
     }
     default:
       return state

@@ -4,7 +4,7 @@ import InputRange from 'react-input-range';
 import './SoundBar.css';
 
 function SoundBar (props) {
-  const songProgress = props.currentSongDuration > 0 ? (props.currentSongProgress / props.currentSongDuration) * 100 : 0;
+  //const played = props.currentSongDuration > 0 ? (props.currentSongProgress / props.currentSongDuration) * 100 : 0;
   // console.log(props.currentSongProgress, songProgress, props.currentSongDuration)
 
   // console.log('soundbar props', props);
@@ -29,7 +29,7 @@ function SoundBar (props) {
           <p className="soundbar__song-name">{props.currentSongName}</p>
         </div>
         <div className="soundbar__main-controls">
-          <a href="#" onClick={props.prevTrack}>
+          <a href="#"  onClick={props.prevTrack}>
             <i className="soundbar__control-buttons fa fa-step-backward" aria-hidden="true"></i>
           </a>
           {/* TODO: Improve Play/Pause UI. */}
@@ -46,12 +46,22 @@ function SoundBar (props) {
           <div className="soundbar__seek-control">
             <InputRange
                 minValue={0}
-                maxValue={100}
-                value={songProgress}
-                formatLabel={value => `${formatDuration(value/100*props.currentSongDuration)}`}
+                maxValue={props.currentSongDuration || 0.01}
+                value={props.songLoaded ? props.played: 0}
+                formatLabel={value => `${formatDuration(value)}`}
                 onChange={value => props.setPlaybackPosition(value)}
-                onChangeComplete={props.onSeekMouseUp}
-                onChangeStart={props.onSeekMouseDown}
+                onChangeComplete={value => {
+                    console.log('change complete', value);
+                    // this.setState({ seeking: false });
+                    // this.setPlaybackPosition(value);
+                    props.onSeekMouseUp(value);
+                }}
+                onChangeStart={
+                    value => {
+                        console.log('change start', value);
+                        props.onSeekMouseDown(value);
+                    }
+                }
                 />
             {/*#5da2e9
             <div className="soundbar__progress progress" onClick={(e) => props.setPlaybackPosition(getClickPosition(e).x)}>
@@ -85,7 +95,7 @@ function SoundBar (props) {
 
 SoundBar.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  currentSongProgress: PropTypes.number.isRequired,
+  played: PropTypes.number.isRequired,
   currentSongDuration: PropTypes.number.isRequired,
   currentSongVolume: PropTypes.number.isRequired,
   playSong: PropTypes.func.isRequired
