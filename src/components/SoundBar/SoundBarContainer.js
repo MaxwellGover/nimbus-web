@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SoundBar from './SoundBar';
 import ReactPlayer from 'react-player';
-import { playSong, songVolume, songDuration, songProgress, skipSong } from '~/redux/modules/audio';
+import { playSong, songVolume, songDuration, songProgress, skipSong, songLoaded } from '~/redux/modules/audio';
 
 class SoundBarContainer extends Component {
   // static propTypes = {
@@ -19,6 +19,8 @@ class SoundBarContainer extends Component {
 
     this.state = {
       songUrl: '',
+      played: 0,
+      loadedSeconds: 0,
       songProgress: 0,
       songDuration: 0,
       seeking: false,
@@ -81,11 +83,16 @@ class SoundBarContainer extends Component {
   }
 
   setPlaybackPosition(pos) {
-      console.log('setPlaybackPosition this=', this);
-      console.log('setPlaybackPosition', pos);
-      if (pos >= 0 && pos <= 100) {
-          let relPos = parseFloat(pos/100);
-          this.player.seekTo(relPos);
+    //   console.log('setPlaybackPosition this=', this);
+    //   console.log('setPlaybackPosition', pos);
+      if (pos >= 0 && pos <= this.props.currentSongDuration) {
+          //let relPos = parseFloat(pos/100);
+          // this.player.seekTo(relPos);
+          this.setState({
+            played: pos
+          });
+
+        //   console.log('played', this.state.played);
       }
   }
 
@@ -105,6 +112,8 @@ class SoundBarContainer extends Component {
   onSeekMouseUp(value) {
       console.log('seek stop', value);
       this.setState({ seeking: false });
+      let relPos = parseFloat(value/this.props.currentSongDuration);
+      this.player.seekTo(relPos);
       this.setPlaybackPosition(value);
   }
 
@@ -127,11 +136,26 @@ class SoundBarContainer extends Component {
     if (progress.playedSeconds === undefined) {
         return; // TODO: Check why this is required? With-out it we're getting Invalid time value
     }
-        this.props.dispatch(songProgress(progress.playedSeconds));
+
+    if (progress.loadedSeconds) {
+        // only update loadedSeconds if defined
+        // console.log('loadedSeconds', progress.loadedSeconds);
         this.setState({
-          songProgress: progress
-        })
-    // }
+            ...this.state,
+            loadedSeconds: progress.loadedSeconds
+        });
+        this.props.dispatch(songLoaded(true));
+    }
+
+    if (!this.state.seeking) {
+        // console.log('update progress', progress);
+        this.props.dispatch(songProgress(progress.playedSeconds));
+
+        this.setState({
+            ...this.state,
+            played: progress.playedSeconds
+        });
+    }
   }
 
   render () {
@@ -159,7 +183,8 @@ class SoundBarContainer extends Component {
           onSeekMouseDown={this.onSeekMouseDown}
           onSeekMouseUp={this.onSeekMouseUp}
           currentSongName={this.props.currentSongName}
-          currentSongProgress={this.props.currentSongProgress}
+          played={this.state.played}
+          songLoaded={this.props.songLoaded}
           currentSongDuration={this.props.currentSongDuration}
           currentSongVolume={this.props.currentSongVolume}/>
       </div>
@@ -175,7 +200,8 @@ function mapStateToProps ({audio}) {
     currentSongName: audio.currentSongName,
     currentSongVolume: audio.currentSongVolume,
     currentSongDuration: audio.currentSongDuration,
-    currentSongProgress: audio.currentSongProgress
+    currentSongProgress: audio.currentSongProgress,
+    songLoaded: audio.songLoaded
   }
 }
 
