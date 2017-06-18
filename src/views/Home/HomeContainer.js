@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { firebaseAuth } from '~/config/constants';
+import { pauseSong } from '../../redux/modules/audio';
 import Home from './Home';
 
 class HomeContainer extends Component {
@@ -14,6 +15,7 @@ class HomeContainer extends Component {
     firebaseAuth.signOut().then(() => {
       // Sign-out successful.
       const push = this.props.history.push;
+      this.props.dispatch(pauseSong());
       push('/');
     }).catch((error) => {
       // An error happened.
