@@ -15,10 +15,10 @@ function Home (props) {
         // todo: check if ux is OK
         soundbar = <SoundBarContainer />
         player = (
-            <template>
+            <div>
                 <Header />
                 <LibraryContainer songList={props.songList}/>
-            </template>
+            </div>
         );
     }
     else {

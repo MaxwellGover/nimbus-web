@@ -29,7 +29,7 @@ function SoundBar (props) {
           <p className="soundbar__song-name">{props.currentSongName}</p>
         </div>
         <div className="soundbar__main-controls">
-          <a>
+          <a href="#" onClick={props.prevTrack}>
             <i className="soundbar__control-buttons fa fa-step-backward" aria-hidden="true"></i>
           </a>
           {/* TODO: Improve Play/Pause UI. */}
@@ -38,7 +38,7 @@ function SoundBar (props) {
             ? <i className="soundbar__control-buttons fa fa-pause" aria-hidden="true"></i>
             : <i className="soundbar__control-buttons fa fa-play" aria-hidden="true"></i>}
           </a>
-          <a>
+          <a href="#" onClick={props.nextTrack}>
             <i className="soundbar__control-buttons fa fa-step-forward" aria-hidden="true"></i>
           </a>
         </div>

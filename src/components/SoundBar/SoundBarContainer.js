@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SoundBar from './SoundBar';
 import ReactPlayer from 'react-player';
-import { isPlaying, songVolume, songDuration, songProgress } from '~/redux/modules/audio';
+import { playSong, songVolume, songDuration, songProgress, skipSong } from '~/redux/modules/audio';
 
 class SoundBarContainer extends Component {
-  static propTypes = {
-    isPlaying: PropTypes.bool.isRequired,
-    currentSongUrl: PropTypes.string.isRequired,
-    currentSongVolume: PropTypes.number.isRequired,
-    currentSongDuration: PropTypes.number.isRequired,
-    currentSongProgress: PropTypes.number.isRequired
-  }
+  // static propTypes = {
+  //   isPlaying: PropTypes.bool.isRequired,
+  //   currentSongUrl: PropTypes.string.isRequired,
+  //   currentSongVolume: PropTypes.number.isRequired,
+  //   currentSongDuration: PropTypes.number.isRequired,
+  //   currentSongProgress: PropTypes.number.isRequired
+  // }
 
   constructor() {
     super();
@@ -35,6 +35,8 @@ class SoundBarContainer extends Component {
     this.setVolume = this.setVolume.bind(this);
     this.getVolume = this.getVolume.bind(this);
     this.setPlaybackPosition = this.setPlaybackPosition.bind(this);
+    this.nextTrack = this.nextTrack.bind(this);
+    this.prevTrack = this.prevTrack.bind(this);
     this.onSeekMouseDown = this.onSeekMouseDown.bind(this);
     this.onSeekMouseUp = this.onSeekMouseUp.bind(this);
     this.getCurrentSongDuration = this.getCurrentSongDuration.bind(this);
@@ -42,7 +44,7 @@ class SoundBarContainer extends Component {
   }
 
   playSong() {
-    this.props.dispatch(isPlaying({
+    this.props.dispatch(playSong({
       downloadURL: this.props.currentSongUrl,
       songName: this.props.currentSongName
     }));
@@ -87,6 +89,14 @@ class SoundBarContainer extends Component {
       }
   }
 
+  nextTrack() {
+      this.props.dispatch(skipSong('next'));
+  }
+
+  prevTrack() {
+      this.props.dispatch(skipSong('prev'));
+  }
+
   onSeekMouseDown(value) {
       console.log('seek start', value);
       this.setState({ seeking: true });
@@ -108,12 +118,15 @@ class SoundBarContainer extends Component {
   getCurrentSongProgress(progress) {
     // TODO: Seeking not working properly --> mute during seeking
     //       & check if progress will be updated during seek
-    
+
     // We only want to update time slider if we are not currently seeking
     // console.log('new progress', progress, this.state);
     // if (!this.state.seeking) {
     // seeking not properly handled yet --> callback onChangeComplete not triggered?!
     // seeking required -> so we can stop update progress and auto-mute playback
+    if (progress.playedSeconds === undefined) {
+        return; // TODO: Check why this is required? With-out it we're getting Invalid time value
+    }
         this.props.dispatch(songProgress(progress.playedSeconds));
         this.setState({
           songProgress: progress
@@ -140,6 +153,8 @@ class SoundBarContainer extends Component {
           setVolume={this.setVolume}
           toggleMute={this.toggleMute}
           isMuted={this.state.muted}
+          nextTrack={this.nextTrack}
+          prevTrack={this.prevTrack}
           setPlaybackPosition={this.setPlaybackPosition}
           onSeekMouseDown={this.onSeekMouseDown}
           onSeekMouseUp={this.onSeekMouseUp}
