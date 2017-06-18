@@ -37,7 +37,8 @@ class App extends Component {
         // Query song list from Firebase on reload.
         songsRef.once('value', snapshot => {
           const data = snapshot.val();
-          songList = Object.keys(data).map(id => {
+          //console.log('songs', data);
+          songList = Object.keys(data || {}).map(id => {
             return {
               songName: data[id].songName,
               downloadURL: data[id].downloadURL

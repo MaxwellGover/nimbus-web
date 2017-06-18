@@ -1,3 +1,5 @@
+@import url(~react-input-range/lib/css/index.css);
+
 .soundbar {
   display: flex;
   flex-direction: column;
@@ -6,14 +8,13 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100px;
+  height: 60px;
   background: url(../../images/bg.png) no-repeat center center fixed;
   z-index: 100;
 }
 
 .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 95%
 }
@@ -26,27 +27,7 @@
 }
 
 .soundbar__currently-playing {
-  display: flex;
-  align-items: center;
   width: 50%;
-  -webkit-transition: all 100ms ease !important;
-     -moz-transition: all 100ms ease !important;
-       -o-transition: all 100ms ease !important;
-          transition: all 100ms ease !important;
-}
-
-.soundbar__thumb {
-  position: absolute;
-  height: 8px;
-  width: 8px;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  margin-top: -2px;
-  z-index: 20;
-  -webkit-transition: all 100ms ease-in-out;
-        -moz-transition: all 100ms ease-in-out;
-             transition: all 100ms ease-in-out;
 }
 
 .soundbar__song-name {
@@ -57,24 +38,13 @@
 
 .soundbar__control-buttons {
   color: #fff;
-  margin-right: 40px;
+  margin-right: 40px
 }
 
 .soundbar__current-song {
   display: flex;
   flex-direction: column;
-  width: 15%;
-}
-
-.soundbar__progress {
-  border: 1px solid green;
-  width: 100%;
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
-.soundbar__progress:hover {
-  cursor: pointer;
+  width: 20%
 }
 
 .soundbar__currently-playing-help {
@@ -83,38 +53,75 @@
   font-size: 12px
 }
 
+/*
 .soundbar__progress-bar {
   height: 4px;
 }
+
+.progress {
+    overflow: visible !important;
+}
+*/
+
 
 .soundbar__volume {
   display: flex;
   align-content: center;
 }
 
+
 .soundbar__volume {
   display: flex;
   align-items: center;
-  width: 15%;
+  width: 25%;
 }
 
 .soundbar__progress-volume {
-  width: 80%;
-  height: 4px
+  width: 50%;
+  /*height: 4px*/
 }
 
+/*
+.thumb {
+  position: relative;
+  float: right;
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: gray;
+  left: 32%;
+  top: 50%;
+  margin-right: -0.25rem;
+  margin-top: -0.15rem;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+  z-index: 110;
+}
+*/
+
 .soundbar__volume-icon {
-  margin-left: 40px;
+  margin-left: 70px;
   margin-right: 10px;
   color: #fff
 }
 
-.soundbar__current-time {
-  font-size: 12px;
-  color: #fff
+.soundbar__volume-label {
+    margin-left: 1em;
 }
 
-.soundbar__song-duration {
-  font-size: 12px;
-  color: #fff
+/*
+Input range css
+*/
+.input-range__label {
+    font-family: inherit;
+}
+
+.input-range__slider {
+    background-color: white;
+}
+
+.input-range__track--active {
+    background-color: rgb(108, 201, 247);
 }

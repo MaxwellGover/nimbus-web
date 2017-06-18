@@ -7,7 +7,8 @@ function Library (props) {
     <ul className="library list-group">
       {props.songList.map((song, index) => {
         return <li
-          className="list-group-item"
+          className={`list-group-item ${song.downloadURL === props.currentSongUrl ?
+                  'active': ''}`}
           key={index}
           onClick={() => props.handleSongClick({
             downloadURL: song.downloadURL,

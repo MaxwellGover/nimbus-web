@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Library from './Library';
-import { playSong } from '~/redux/modules/audio';
+import { firebaseAuth, db } from '~/config/constants';
+import { storeSongs, selectSong } from '~/redux/modules/audio';
 
 class LibraryContainer extends Component {
   static propTypes = {
@@ -17,7 +18,7 @@ class LibraryContainer extends Component {
     }
   }
   handleSongClick = (song) => {
-    this.props.dispatch(playSong(song))
+    this.props.dispatch(selectSong(song))
   }
   mouseEnter = () => {
     this.setState({ mouseInside: true });
@@ -33,6 +34,7 @@ class LibraryContainer extends Component {
         mouseInside={this.state.mouseInside}
         mouseEnter={this.mouseEnter}
         mouseExit={this.mouseExit}
+        currentSongUrl={this.props.currentSongUrl}
       />
     );
   }
@@ -41,7 +43,8 @@ class LibraryContainer extends Component {
 function mapStateToProps ({authentication, audio}) {
   return {
     uid: authentication.uid,
-    songList: audio.songList
+    songList: audio.songList,
+    currentSongUrl: audio.currentSongUrl
   }
 }
 
