@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { createUser } from '~/redux/modules/authentication';
-// import logo from '~/images/logo.png';
+// import Validation from 'react-validation';
 import './SignUp.css';
 
 class SignUp extends Component {
@@ -19,7 +19,8 @@ class SignUp extends Component {
       displayName: '',
       email: '',
       password: '',
-      confirmPasswordText: ''
+      confirmPasswordText: '',
+      errors: {}
     }
   }
   handleUsernameChange = (event) => {

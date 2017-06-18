@@ -42,7 +42,6 @@ function Home (props) {
                     {props.displayName}
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a className="dropdown-item" href="#">Profile</a>
                     <a className="dropdown-item" href="#" onClick={props.signOut}>Sign Out</a>
                   </div>
                 </li>

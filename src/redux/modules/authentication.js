@@ -42,7 +42,8 @@ export function createUser (formData, push) {
       db.ref('/users/' + user.uid).set({
         username: formData.username,
         displayName: formData.displayName,
-        uid: user.uid
+        uid: user.uid,
+        profileImage: ''
       })
       dispatch(isAuthed({
         uid: user.uid,

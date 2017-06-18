@@ -13,10 +13,10 @@ import './App.css';
 class App extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    uid: PropTypes.string.isRequired
+    uid: PropTypes.string.isRequired,
+    songList: PropTypes.array.isRequired
   }
   componentDidMount () {
-    var songList = [];
     firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         const displayNameRef = db.ref(`users/${user.uid}/displayName`);
@@ -29,6 +29,10 @@ class App extends Component {
             name: snapshot.val()
           }))
         })
+
+        if (this.props.songList.length === 0) {
+          return;
+        }
 
         // Query song list from Firebase on reload.
         songsRef.once('value', snapshot => {
@@ -68,9 +72,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authentication }) {
+function mapStateToProps ({ authentication, audio }) {
   return {
-    uid: authentication.uid
+    uid: authentication.uid,
+    songList: audio.songList
   }
 }
 
