@@ -31,7 +31,7 @@ function Home (props) {
       <div className="home__left">
         <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
           <a className="navbar-brand" href="#">
-            <img src={require('../../images/logo.png')} width="160px" alt="logo" />
+            <img src={require('../../images/hf.png')} width="40px" alt="logo" />
           </a>
           <div className="home__navbar-right">
             <UploadContainer />
@@ -51,9 +51,6 @@ function Home (props) {
         </nav>
         {player}
         {soundbar}
-      </div>
-      <div className="home__right">
-        <Side />
       </div>
     </div>
   );

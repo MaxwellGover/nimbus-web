@@ -6,9 +6,13 @@
   border-radius: 0px;
   margin-top: 130px;
   background-color: #000;
+  position: fixed
 }
 
 .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #000;
   color: #fff;
   border-radius: 0px;
@@ -17,4 +21,8 @@
 .list-group-item:hover {
   background: #141414;
   cursor: pointer;
+}
+
+.library__music-icon {
+  color: #F4543F
 }

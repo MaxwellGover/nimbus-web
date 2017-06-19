@@ -4,7 +4,7 @@ import './Side.css';
 function Side (props) {
   return (
     <div className="side">
-      <p>I am a sidebar</p>
+      <canvas></canvas>
     </div>
   );
 }

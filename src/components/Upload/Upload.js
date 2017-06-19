@@ -8,8 +8,8 @@ function Upload (props) {
       <div className="upload__percent-complete">
         <h5 style={{color: props.percentage < 1 ? '#5A5A5A' : '#39ff14'}}>{Math.floor(props.percentage)}%</h5>
       </div>
-      <label className="upload__button btn btn-primary">
-        Upload a song <input className="upload__input" type="file" onChange={(e) => props.uploadSong(e)}/>
+      <label className="upload__button btn btn-outline-warning">
+        <p className="upload__button-text">Upload a song</p> <input className="upload__input" type="file" onChange={(e) => props.uploadSong(e)}/>
       </label>
     </div>
   );

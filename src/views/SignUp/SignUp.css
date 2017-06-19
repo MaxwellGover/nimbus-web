@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url(../../images/bg.png) no-repeat center center fixed;
+  background: #141414;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -24,7 +24,7 @@
 }
 
 .sign-up__logo {
-  width: 200px
+  width: 100px
 }
 
 .sign-up__input {
@@ -34,8 +34,8 @@
 .sign-up__button {
   width: 100%;
   margin-top: 30px;
-  background-color: #141414;
-  border-color: #141414;
+  background-color: #000;
+  border-color: #000;
   font-family: 'Nunito', sans-serif;
   cursor: pointer;
 }
@@ -43,8 +43,8 @@
 .sign-up__button:hover {
   width: 100%;
   margin-top: 30px;
-  background-color: #141414;
-  border-color: #141414;
+  background-color: #000;
+  border-color: #000;
   font-family: 'Nunito', sans-serif;
   cursor: pointer;
 }

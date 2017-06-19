@@ -47,10 +47,10 @@ class SignUp extends Component {
     return (
       <div className="sign-up">
         <div className="sign-up__logo-wrapper">
-          <img className="sign-up__logo" src="http://i.imgur.com/OHRPgRy.png" alt="nimbus"/>
+          <img className="sign-up__logo" src="http://i.imgur.com/kZDsecU.png" alt="nimbus"/>
         </div>
         <div className="sign-up__text-wrapper">
-          <h5>Create a free Nimbus account.</h5>
+          <h5>Create a free account.</h5>
         </div>
         <form className="sign-up__form" onSubmit={(e) => this.handleSubmit(this.state, push, e)}>
           <div className="form-group">

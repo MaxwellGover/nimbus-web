@@ -19,8 +19,28 @@
   width: 200px;
   margin: 0;
   margin-right: 20px;
-  background: url(../../images/bg.png) no-repeat center center fixed;
-  border: #141414;
+  border-color: #FF4940
+}
+
+.upload__button-text {
+  color: #FF4940;
+  margin: 0;
+  padding: 0;
+}
+
+.upload__button-text:hover {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.upload__button:hover {
+  cursor: pointer;
+  width: 200px;
+  margin: 0;
+  margin-right: 20px;
+  border-color: #FF4940;
+  background: #FF4940
 }
 
 .upload__input {

@@ -21,7 +21,7 @@ class App extends Component {
       if (user) {
         const displayNameRef = db.ref(`users/${user.uid}/displayName`);
         const songsRef = db.ref(`users/${user.uid}/availableTracks/`);
-        let songList;
+        const songList = [];
 
         displayNameRef.once('value').then(snapshot => {
           this.props.dispatch(isAuthed({
@@ -30,23 +30,18 @@ class App extends Component {
           }))
         })
 
-        if (this.props.songList.length === 0) {
-          return;
-        }
-
         // Query song list from Firebase on reload.
         songsRef.once('value', snapshot => {
           const data = snapshot.val();
-          //console.log('songs', data);
-          songList = Object.keys(data || {}).map(id => {
-            return {
-              songName: data[id].songName,
-              downloadURL: data[id].downloadURL
-            }
+          snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+            const song = childSnapshot.val();
+
+            songList.push(song);
           });
         }).then(() => {
           this.props.dispatch(storeSongs(songList))
-        })
+        }).catch((error) => console.warn(error))
       } else {
         this.props.dispatch(notAuthed())
       }
