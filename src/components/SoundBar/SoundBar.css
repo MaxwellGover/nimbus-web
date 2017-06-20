@@ -1,4 +1,4 @@
-@import 'react-input-range/lib/css/index.css';
+@import url(~react-input-range/lib/css/index.css);
 
 .soundbar {
   display: flex;
@@ -24,6 +24,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid orange;
+  margin-right: 40px
 }
 
 .soundbar__currently-playing {
@@ -38,7 +40,7 @@
 
 .soundbar__control-buttons {
   color: #fff;
-  margin-right: 40px
+  margin-right: 40px;
 }
 
 .soundbar__current-song {
@@ -115,14 +117,39 @@
 /*
 Input range css
 */
+
 .input-range__label {
     font-family: inherit;
 }
 
 .input-range__slider {
-    background-color: white;
+    background-color: #FF4940;
+    border: 1px solid #FF4940;
 }
 
+.input-range__label {
+  color: '#fff';
+  border: 2px solid yellow;
+}
+
+.input-range__label--min,
+.input-range__label--max {
+  bottom: -1.4rem;
+  position: absolute;
+  border: 2px solid blue;
+}
+
+.input-range__label--min {
+  border: 2px solid red;
+  left: -40px;
+  top: 10px;
+}
+
+.input-range__label--min,
+.input-range__label--max {
+  bottom: -1.4rem;
+  position: absolute; }
+
 .input-range__track--active {
-    background-color: rgb(108, 201, 247);
+    background-color: #FF4940;
 }
