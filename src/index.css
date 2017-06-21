@@ -5,7 +5,6 @@ body {
   padding: 0;
   font-family: 'Nunito', sans-serif;
   background: #000;
-  min-height: 100vh;
 }
 
 .app__container {

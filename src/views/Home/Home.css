@@ -1,38 +1,39 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+/* Home Layout */
+
 .home {
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-  background-color: #000;
-}
-
-.home__left {
-  display: flex;
-  flex-direction: column;
-  background-color: #141414;
-  width: 100%;
-  height: 100%;
-}
-
-.home__navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.home__nav-links {
-  display: flex;
-  align-items: center;
-  font-family: 'Nunito', sans-serif;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 50px 1fr 100px;
   background: #141414;
-  z-index: 20
+}
+
+.home__sidebar-wrapper {
+  grid-column: 1;
+  grid-row: 1 / 4;
+}
+
+.home__nav {
+  grid-column: 2;
+  grid-row: 1;
+  background: #141414;
+}
+
+.home__header-wrapper {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.home__library-wrapper {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.home__soundbar-wrapper {
+  border: 2px solid lime;
+  grid-column: 1 / 3;
+  grid-row: 4;
 }

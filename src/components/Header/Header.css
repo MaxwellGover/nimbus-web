@@ -2,17 +2,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
   width: 100%;
-  height: 60px;
-  margin-top: 70px;
+  height: 100%;
   background: #FF4940;
-  position: fixed;
-  z-index: 10
 }
 
-.header__header-text {
-  margin-left: 20px;
+.header__text {
   color: #fff;
   font-size: 18px;
   margin: 0 0 0 20px;

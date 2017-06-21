@@ -10,16 +10,17 @@ import './Home.css';
 function Home (props) {
     let soundbar = null;
     let player = null; //header + container
+
     if (props.songList.length > 0) {
-        // render soundbar only if there are tracks to play
-        // todo: check if ux is OK
-        soundbar = <SoundBarContainer />
-        player = (
-            <div>
-                <Header />
-                <LibraryContainer songList={props.songList}/>
-            </div>
-        );
+      // render soundbar only if there are tracks to play
+      // todo: check if ux is OK
+      soundbar = <SoundBarContainer />
+      player = (
+        <div>
+          <Header />
+          <LibraryContainer songList={props.songList}/>
+        </div>
+      );
     }
     else {
         // todo check loading flag --> avoid flicker during load!
@@ -27,6 +28,22 @@ function Home (props) {
     }
 
   return (
+    <div className="home">
+      <div className="home__sidebar-wrapper">Side</div>
+      <nav className="home__nav navbar navbar-light bg-faded">
+        <a className="navbar-brand" href="#">
+          <img src="http://i.imgur.com/kZDsecU.png" width="45" height="45" alt="" />
+        </a>
+      </nav>
+      <div className="home__header-wrapper">
+        <Header />
+      </div>
+      <div className="home__library-wrapper">
+        <LibraryContainer songList={props.songList}/>
+      </div>
+      { soundbar }
+    </div>
+    /*
     <div className="home">
       <div className="home__left">
         <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -53,6 +70,7 @@ function Home (props) {
         {soundbar}
       </div>
     </div>
+    */
   );
 }
 

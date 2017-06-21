@@ -4,152 +4,60 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background: #141414;
-  z-index: 100;
+  height: 100%;
+  width: 100%;
 }
 
 .container {
   display: flex;
-  align-items: center;
-  width: 95%
+  justify-content: space-between;
+  width: 100%;
 }
 
-.soundbar__main-controls {
-  width: 15%;
+.soundbar_input-range-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.soundbar_main-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  margin-bottom: 10px;
+}
+
+.soundbar_volume {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid orange;
-  margin-right: 40px
+  width: 10%;
+  margin-right: 20px;
 }
 
-.soundbar__currently-playing {
-  width: 50%;
-}
-
-.soundbar__song-name {
-  color: #fff;
-  margin-top: 3px;
-  margin: 0;
-}
-
-.soundbar__control-buttons {
-  color: #fff;
-  margin-right: 40px;
-}
-
-.soundbar__current-song {
-  display: flex;
-  flex-direction: column;
+.soundbar_currently-playing {
   width: 20%;
-  font-size: 12px;
 }
 
-.soundbar__currently-playing-help {
-  margin: 0;
-  color: #ececec;
-  font-size: 12px
+.react-player {
+  width: 0px;
+  height: 0px;
 }
 
-/*
-.soundbar__progress-bar {
-  height: 4px;
+.soundbar_back-icon {
+  color: #696969;
 }
 
-.progress {
-    overflow: visible !important;
-}
-*/
-
-
-.soundbar__volume {
-  display: flex;
-  align-content: center;
+.soundbar_play-icon {
+  color: #696969;
 }
 
-
-.soundbar__volume {
-  display: flex;
-  align-items: center;
-  width: 25%;
+.soundbar_forward-icon {
+  color: #696969;
 }
 
-.soundbar__progress-volume {
-  width: 50%;
-  /*height: 4px*/
-}
-
-/*
-.thumb {
-  position: relative;
-  float: right;
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: gray;
-  left: 32%;
-  top: 50%;
-  margin-right: -0.25rem;
-  margin-top: -0.15rem;
-  border-radius: 50%;
-  cursor: pointer;
-  -webkit-transition: all 100ms ease-in-out;
-  -moz-transition: all 100ms ease-in-out;
-  transition: all 100ms ease-in-out;
-  z-index: 110;
-}
-*/
-
-.soundbar__volume-icon {
-  margin-left: 70px;
-  margin-right: 10px;
-  color: #fff
-}
-
-.soundbar__volume-label {
-    margin-left: 1em;
-}
-
-/*
-Input range css
-*/
-
-.input-range__label {
-    font-family: inherit;
-}
-
-.input-range__slider {
-    background-color: #FF4940;
-    border: 1px solid #FF4940;
-}
-
-.input-range__label {
-  color: '#fff';
-  border: 2px solid yellow;
-}
-
-.input-range__label--min,
-.input-range__label--max {
-  bottom: -1.4rem;
-  position: absolute;
-  border: 2px solid blue;
-}
-
-.input-range__label--min {
-  border: 2px solid red;
-  left: -40px;
-  top: 10px;
-}
-
-.input-range__label--min,
-.input-range__label--max {
-  bottom: -1.4rem;
-  position: absolute; }
-
-.input-range__track--active {
-    background-color: #FF4940;
+.soundbar_volume-icon {
+  color: #696969;
+  margin-right: 7px;
 }

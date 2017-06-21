@@ -11,11 +11,55 @@ function SoundBar (props) {
   }
   let speakerSymbol = (
       <a href="#" onClick={props.toggleMute}>
-        <i className={`soundbar__volume-icon fa ${props.isMuted ? 'fa-volume-off' : 'fa-volume-up'}`} aria-hidden="true"></i>
+        <i className={`soundbar_volume-icon fa ${props.isMuted ? 'fa-volume-off' : 'fa-volume-up'}`} aria-hidden="true"></i>
       </a>
   );
 
   return (
+    <div className="soundbar">
+      <div className="container">
+        <div className="soundbar_currently-playing">
+
+        </div>
+        <div className="soundbar_input-range-wrapper">
+          <div className="soundbar_main-controls">
+            <i className="soundbar_back-icon fa fa-step-backward fa-2x" aria-hidden="true"></i>
+            <i className="soundbar_play-icon fa fa-play-circle-o fa-2x" aria-hidden="true"></i>
+            <i className="soundbar_forward-icon fa fa-step-forward fa-2x" aria-hidden="true"></i>
+          </div>
+          <InputRange
+            minValue={0}
+            maxValue={props.currentSongDuration || 0.01}
+            value={props.songLoaded ? props.played: 0}
+            formatLabel={value => `${formatDuration(value)}`}
+            onChange={value => props.setPlaybackPosition(value)}
+            onChangeComplete={value => {
+              console.log('change complete', value);
+              // this.setState({ seeking: false });
+              // this.setPlaybackPosition(value);
+              props.onSeekMouseUp(value);
+            }}
+            onChangeStart={
+              value => {
+                console.log('change start', value);
+                props.onSeekMouseDown(value);
+              }
+            }
+          />
+        </div>
+        <div className="soundbar_volume">
+          {speakerSymbol}
+          <InputRange
+            minValue={0}
+            maxValue={100}
+            formatLabel={value => ''}
+            value={props.currentSongVolume * 100}
+            onChange={value => props.setVolume(value)}
+          />
+        </div>
+      </div>
+    </div>
+    /*
     <div className="soundbar">
       <div className="container">
         <div className="soundbar__current-song">
@@ -26,7 +70,6 @@ function SoundBar (props) {
           <a href="#"  onClick={props.prevTrack}>
             <i className="soundbar__control-buttons fa fa-step-backward" aria-hidden="true"></i>
           </a>
-          {/* TODO: Improve Play/Pause UI. */}
           <a href="#" onClick={props.playSong} >
           {props.isPlaying === true
             ? <i className="soundbar__control-buttons fa fa-pause" aria-hidden="true"></i>
@@ -76,6 +119,7 @@ function SoundBar (props) {
         </div>
       </div>
     </div>
+    */
   );
 }
 
