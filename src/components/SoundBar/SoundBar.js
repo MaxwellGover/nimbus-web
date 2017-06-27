@@ -23,15 +23,19 @@ function SoundBar (props) {
         </div>
         <div className="soundbar_input-range-wrapper">
           <div className="soundbar_main-controls">
-            <i className="soundbar_back-icon fa fa-step-backward fa-2x" aria-hidden="true"></i>
-            <i className="soundbar_play-icon fa fa-play-circle-o fa-2x" aria-hidden="true"></i>
-            <i className="soundbar_forward-icon fa fa-step-forward fa-2x" aria-hidden="true"></i>
+            <i className="soundbar_back-icon fa fa-step-backward" aria-hidden="true"></i>
+            <a href="#" onClick={props.playSong} >
+            {props.isPlaying === true
+              ? <i className="soundbar_pause-icon fa fa-pause-circle-o fa-2x" aria-hidden="true"></i>
+              : <i className="soundbar_play-icon fa fa-play-circle-o fa-2x" aria-hidden="true"></i>}
+            </a>
+            <i className="soundbar_forward-icon fa fa-step-forward" aria-hidden="true"></i>
           </div>
           <InputRange
             minValue={0}
             maxValue={props.currentSongDuration || 0.01}
-            value={props.songLoaded ? props.played: 0}
-            formatLabel={value => `${formatDuration(value)}`}
+            value={props.songLoaded ? props.played : 0}
+            formatLabel={(value => `${formatDuration(value)}`)}
             onChange={value => props.setPlaybackPosition(value)}
             onChangeComplete={value => {
               console.log('change complete', value);

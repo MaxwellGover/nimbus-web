@@ -30,10 +30,25 @@ function Home (props) {
   return (
     <div className="home">
       <div className="home__sidebar-wrapper">Side</div>
-      <nav className="home__nav navbar navbar-light bg-faded">
+      <nav className="home__nav navbar navbar-toggleable-md navbar-light bg-faded">
         <a className="navbar-brand" href="#">
           <img src="http://i.imgur.com/kZDsecU.png" width="45" height="45" alt="" />
         </a>
+        <div className="home__navbar-right">
+          <UploadContainer />
+          <div className="home__nav-links collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" style={{color: '#fff'}} href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {props.displayName}
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a className="dropdown-item" href="#" onClick={props.signOut}>Sign Out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
       <div className="home__header-wrapper">
         <Header />

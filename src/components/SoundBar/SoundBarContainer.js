@@ -115,7 +115,8 @@ class SoundBarContainer extends Component {
   render () {
     const AudioPlayer = (
       <ReactPlayer
-        className="react-player"
+        width="0px"
+        height="0px"
         ref={player => { this.player = player }}
         url={this.props.currentSongUrl}
         playing={this.props.isPlaying}

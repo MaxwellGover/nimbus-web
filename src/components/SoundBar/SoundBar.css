@@ -23,7 +23,8 @@
 
 .soundbar_main-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   width: 20%;
   margin-bottom: 10px;
 }
@@ -53,6 +54,10 @@
   color: #696969;
 }
 
+.soundbar_pause-icon {
+  color: #696969;
+}
+
 .soundbar_forward-icon {
   color: #696969;
 }
@@ -60,4 +65,30 @@
 .soundbar_volume-icon {
   color: #696969;
   margin-right: 7px;
+}
+
+/* Input Range Styles */
+.input-range__label--min {
+  border: 2px solid yellow;
+  display: none;
+}
+
+.input-range__slider {
+  background: #FF4940;
+  border: 1px solid #FF4940;
+}
+
+.input-range__track--active {
+  background: #FF4940;
+}
+
+.input-range__label--max {
+  top: -4px;
+  right: -30px;
+}
+
+.input-range__label--value {
+  position: absolute;
+  top: -0.8rem;
+  left: -2.5rem;
 }

@@ -19,7 +19,9 @@ class UploadContainer extends Component {
     }
   }
   uploadSong = (e) => {
+    console.log('running...');
     const file = e.target.files[0];
+    // TODO: Check file names. If they are the same. Prompt user that there is already a track w/ that name.
     const audioRef = storageRef.child('audio/' + file.name);
     const task = audioRef.put(file);
 
